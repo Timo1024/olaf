@@ -2,6 +2,7 @@ import { BaseCommandInteraction, Client } from "discord.js";
 import { Command } from "../Command";
 import { hello } from "../parameters/commands.json"
 
+// TODO make dev command only
 export const Hello: Command = {
     name: hello.name,
     description: hello.description,
