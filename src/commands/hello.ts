@@ -8,7 +8,7 @@ export const Hello: Command = {
     type: "CHAT_INPUT",
     run: async (client: Client, interaction: BaseCommandInteraction) => {
         
-        const content = "Moin, werde grade wiederbelebt... und bin jetzt über einen externen Server online";
+        const content : string = "Moin, werde grade wiederbelebt... und bin jetzt über einen externen Server online";
 
         await interaction.followUp({
             ephemeral: true,
