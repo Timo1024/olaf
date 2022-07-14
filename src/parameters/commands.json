@@ -13,5 +13,52 @@
                 "description" : "user you want to see information about"
             }
         ]
+    },
+
+    "miesmuschel" : {
+        "name" : "miesmuschel",
+        "description" : "Answers to a question",
+        "options" : [
+            {
+                "name" : "question",
+                "description" : "your question"
+            }
+        ],
+        "parameters" : {
+            "answers" : [
+                "vielleicht",
+                "ja",
+                "nein",
+                "hallo",
+                "woher soll ich das wissen",
+                "frag doch gizem",
+                "frag doch cici",
+                "frag doch robin, er weiß doch alles besser",
+                "pizzanudel",
+                "vermutlich eher nicht",
+                "was geht mich das an",
+                "möglicherweise",
+                "ich denke schon",
+                "vermutlich schon",
+                "was weiß ich",
+                "können wir die antwort überspringen?",
+                "mach was du willst",
+                "mir doch egal",
+                "weiß ich nicht",
+                "frag meinen opa",
+                "lol",
+                "morgen weiß ich vielleicht mehr darüber",
+                "was würde deine mutter darüber denken?",
+                "als ob ich dir das beantworten werde",
+                "Hilfe!",
+                " ",
+                "wer bist du überhaupt?",
+                "was fällt dir ein mich sowas zu fragen",
+                "nächste frage bitte",
+                "weil Haie rückwärts schwimmen",
+                "ich geh mal eine rauchen",
+                "42"
+            ]
+        }
     }
 }
