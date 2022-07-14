@@ -1,0 +1,17 @@
+{
+    "hello" : {
+        "name" : "hello",
+        "description" : "Returns a greeting"
+    },
+
+    "user_data" : {
+        "name" : "user",
+        "description" : "Returns information about a tagged user",
+        "options" : [
+            {
+                "name" : "user",
+                "description" : "user you want to see information about"
+            }
+        ]
+    }
+}

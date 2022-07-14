@@ -1,14 +1,16 @@
 import { BaseCommandInteraction, Client, Guild, GuildMember, MessageEmbed, User } from "discord.js";
 import { Command } from "../Command";
+import { user_data } from "../parameters/commands.json";
+import { guild_id } from "../parameters/config.json"
 
 export const UserInfo: Command = {
-    name: "user",
-    description: "Returns information about a tagged user",
+    name: user_data.name,
+    description: user_data.description,
     options: [
         {
-            type: 6,
-            name: "user",
-            description: "user you want to see information about"
+            name: user_data.options[0].name,
+            description: user_data.options[0].description,
+            type: 6
         }
     ],
     type: "CHAT_INPUT",
@@ -16,7 +18,7 @@ export const UserInfo: Command = {
         
         let response : string | MessageEmbed;
 
-        const tagged_user : User | null = interaction.options.getUser("user");
+        const tagged_user : User | null = interaction.options.getUser(user_data.options[0].name);
         let user : User;
         if(tagged_user){
             user = tagged_user
@@ -30,7 +32,7 @@ export const UserInfo: Command = {
         var et = ea[4].split(":");
         var erstellt_date = ea[2] + ". " + ea[1] + " " + ea[3] + " um " + et[0] + ":" + et[1] + " Uhr";
         
-        const guild : Guild | undefined = client.guilds.cache.get("626016654106820618")
+        const guild : Guild | undefined = client.guilds.cache.get(guild_id)
 
         if(guild){
 
