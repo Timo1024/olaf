@@ -9,11 +9,15 @@ export const Miesmuschel: Command = {
         {
             name: miesmuschel.options[0].name,
             description: miesmuschel.options[0].description,
-            type: "STRING"
+            type: "STRING",
+            required: true
         }
     ],
     type: "CHAT_INPUT",
     run: async (client: Client, interaction: BaseCommandInteraction) => {
+        
+        let question : string = "no question was asked, but I respond anyway..."
+        question = interaction.options.get(miesmuschel.options[0].name)?.value as string
         
         let response : string = "default";
 
@@ -28,7 +32,9 @@ export const Miesmuschel: Command = {
 
         }
 
-        await interaction.followUp(response);
+        await interaction.followUp(
+            "Question:\t" + question + "\nAnswer:  \t " + response
+        );
     }
 };
 

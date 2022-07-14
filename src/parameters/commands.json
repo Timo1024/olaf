@@ -20,7 +20,7 @@
         "description" : "Answers to a question",
         "options" : [
             {
-                "name" : "quastion",
+                "name" : "question",
                 "description" : "your question"
             }
         ],
