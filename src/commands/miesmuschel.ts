@@ -2,7 +2,7 @@ import { BaseCommandInteraction, Client, Guild, GuildMember, MessageEmbed, User 
 import { Command } from "../Command";
 import { miesmuschel } from "../parameters/commands.json";
 
-export const UserInfo: Command = {
+export const Miesmuschel: Command = {
     name: miesmuschel.name,
     description: miesmuschel.description,
     options: [
