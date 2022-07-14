@@ -6,7 +6,7 @@ import { token } from "./auth.json"
 console.log("Bot is starting...");
 
 const client = new Client({
-    intents: []
+    intents: ["GUILD_MEMBERS"]
 });
 
 ready(client);
