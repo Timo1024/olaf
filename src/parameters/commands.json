@@ -19,6 +19,21 @@
         "name" : "infos"
     },
 
+    "send" : {
+        "name" : "send",
+        "description" : "lets Olaf send a message in specified channel",
+        "options" : [
+            {
+                "name" : "channel",
+                "description" : "write the id of the channel"
+            },
+            {
+                "name" : "message",
+                "description" : "what olaf will send"
+            }
+        ]
+    },
+
     "miesmuschel" : {
         "name" : "miesmuschel",
         "description" : "Answers to a question",
