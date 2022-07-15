@@ -36,7 +36,7 @@ export const MessageInfo: UICommand = {
 
             let msg_content : string = (message_data.content.length == 0) ? 
                 "" : 
-                `The content of this message is "*${message_data.content}*". `;
+                `The content of this message is \n*${message_data.content}*\n`;
 
             // content infos
             response.addField(

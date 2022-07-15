@@ -7,7 +7,7 @@ import { UserInfo } from "./commands/user_data";
 import { Miesmuschel } from "./commands/miesmuschel";
 
 // TODO for all new MESSAGE UI commands
-import { MessageInfo } from "./commands/ui_message/test";
+import { MessageInfo } from "./commands/ui_message/message_info";
 
 // TODO for new command
 // add alls commands to this array
