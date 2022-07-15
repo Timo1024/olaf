@@ -24,7 +24,7 @@ export const MessageInfo: UICommand = {
             // user infos
             response.addField(
                 `Information about the user`, 
-                `The full username of the author of the message is #${message_data.author.discriminator}${message_data.author.username}. This user ${bot} a bot.`, 
+                `The full username of the author of the message is ${message_data.author.username}#${message_data.author.discriminator}. This user ${bot} a bot.`, 
                 false
             );
 
