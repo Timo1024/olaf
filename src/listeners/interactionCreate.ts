@@ -15,16 +15,26 @@ export default (client: Client): void => {
 
 const handleSlashCommand = async (client: Client, interaction: BaseCommandInteraction): Promise<void> => {
     
-    const slashCommand = Commands.find(c => c.name === interaction.commandName) || UICommands.find(c => c.name === interaction.commandName);
-    // const slashCommand = Commands.find(c => c.name === interaction.commandName);
-    // const slashCommand = UICommands.find(c => c.name === interaction.commandName);
+    const slashCommand = Commands.find(c => c.name === interaction.commandName);
+    const uiMessageCommand = UICommands.find(c => c.name === interaction.commandName);
+    
+    // if (!slashCommand && !uiMessageCommand) {
     if (!slashCommand) {
         interaction.followUp({ content: "An error has occurred" });
         return;
     }
 
     await interaction.deferReply();
-
+    
+    // if(slashCommand){
     slashCommand.run(client, interaction);
+    // }
+    // else if(uiMessageCommand){
+    //     uiMessageCommand.run(client, interaction);
+    // }
+    // else {
+    //     interaction.followUp({ content: "An error has occurred" });
+    //     return;
+    // }
 
 };
