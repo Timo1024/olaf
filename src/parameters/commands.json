@@ -15,6 +15,10 @@
         ]
     },
 
+    "message_info" : {
+        "name" : "test"
+    },
+
     "miesmuschel" : {
         "name" : "miesmuschel",
         "description" : "Answers to a question",
