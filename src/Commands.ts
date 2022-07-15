@@ -12,4 +12,3 @@ import { MessageInfo } from "./commands/ui_message/test";
 // TODO for new command
 // add alls commands to this array
 export const Commands: (Command | UICommand)[] = [UserInfo, Hello, Miesmuschel, MessageInfo];
-// export const UICommands : UICommand[] = [Test]

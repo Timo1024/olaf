@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client, MessageContextMenuInteraction, MessageEmbed, User, UserContextMenuInteraction } from "discord.js";
+import { BaseCommandInteraction, Client, MessageEmbed } from "discord.js";
 import { UICommand } from "../../Command";
 import { message_info } from "../../parameters/commands.json"
 
