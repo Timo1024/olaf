@@ -1,4 +1,3 @@
-import { Channel } from "diagnostics_channel";
 import { BaseCommandInteraction, Client } from "discord.js";
 import { Command } from "../Command";
 import { send } from "../parameters/commands.json";
