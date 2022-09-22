@@ -4,6 +4,11 @@
         "description" : "Returns a greeting"
     },
 
+    "canvas_test" : {
+        "name" : "canvas test",
+        "description" : "Returns a canvas"
+    },
+
     "user_data" : {
         "name" : "user",
         "description" : "Returns information about a tagged user",
