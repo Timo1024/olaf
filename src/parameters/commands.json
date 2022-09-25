@@ -4,6 +4,33 @@
         "description" : "Returns a greeting"
     },
 
+    "keyv" : {
+        "name" : "keyv",
+        "description" : "Adds new archive (test)",
+        "options" : [
+            {
+                "name" : "quote",
+                "description" : "The thing which was said or written"
+            },
+            {
+                "name" : "name",
+                "description" : "The Person / Persons who said the quote"
+            },
+            {
+                "name" : "timestamp",
+                "description" : "When the Quote was said"
+            },
+            {
+                "name" : "quizz",
+                "description" : "Should the quote be in the archive quizz?"
+            },
+            {
+                "name" : "user",
+                "description" : "Tag the user who said the quote"
+            }
+        ]
+    },
+
     "user_data" : {
         "name" : "user",
         "description" : "Returns information about a tagged user",
