@@ -92,6 +92,36 @@
                     "description" : "tagged user (optional)"
                 }
             ]
+        },
+        "editArchive" : {
+            "name" : "edit-archive",
+            "description" : "Editing a archive entry",
+            "options" : [
+                {
+                    "name" : "nr",
+                    "description" : "the number of the quote you want to edit"
+                },
+                {
+                    "name" : "content",
+                    "description" : "the quote"
+                },
+                {
+                    "name" : "person",
+                    "description" : "the person/persons who said the quote"
+                },
+                {
+                    "name" : "time",
+                    "description" : "when the quote was said"
+                },
+                {
+                    "name" : "quizz",
+                    "description" : "if the quote should be in the quizz"
+                },
+                {
+                    "name" : "user",
+                    "description" : "tagged user (optional)"
+                }
+            ]
         }
     }
 }

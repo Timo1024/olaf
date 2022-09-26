@@ -6,10 +6,11 @@ import { Hello } from "./commands/hello";
 import { UserInfo } from "./commands/user_data";
 import { Miesmuschel } from "./commands/miesmuschel";
 import { addArchive } from "./commands/archive/addArchive";
+import { editArchive } from "./commands/archive/editArchive";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
 
 // TODO for new command
 // add alls commands to this array
-export const Commands: (Command | UICommand)[] = [UserInfo, Hello, Miesmuschel, MessageInfo, addArchive];
+export const Commands: (Command | UICommand)[] = [UserInfo, Hello, Miesmuschel, MessageInfo, addArchive, editArchive];

@@ -3,7 +3,6 @@ import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 var fs = require("fs");
 
-// TODO make dev command only
 export const addArchive: Command = {
     name: archive.makeArchive.name,
     description: archive.makeArchive.description,
