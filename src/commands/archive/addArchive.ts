@@ -1,4 +1,4 @@
-import { BaseCommandInteraction, Client } from "discord.js";
+import { BaseCommandInteraction, Client, Message, MessageEmbed, User } from "discord.js";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 var fs = require("fs");
@@ -59,41 +59,54 @@ export const addArchive: Command = {
             const number : string = lastLine.split("|")[0];
 
             let newArchiveLine : string = "";
-
-            newArchiveLine += "\n";
-            newArchiveLine += (parseInt(number)+1).toString();
-            newArchiveLine += "|";
-            newArchiveLine += interaction.options.get(archive.makeArchive.options[0].name)?.value as string;
-            newArchiveLine += "|";
-            newArchiveLine += interaction.options.get(archive.makeArchive.options[1].name)?.value as string;
-            newArchiveLine += "|";
-            newArchiveLine += interaction.options.get(archive.makeArchive.options[2].name)?.value as string;
-            newArchiveLine += "|";
-            newArchiveLine += (interaction.options.get(archive.makeArchive.options[3].name)?.value)?.toString();
-            newArchiveLine += "|";
+            const nextNumber : string = (parseInt(number)+1).toString();
+            const content    : string = interaction.options.get(archive.makeArchive.options[0].name)?.value as string;
+            const person     : string = interaction.options.get(archive.makeArchive.options[1].name)?.value as string;
+            const date       : string = interaction.options.get(archive.makeArchive.options[2].name)?.value as string;
+            const quizz      : string = (interaction.options.get(archive.makeArchive.options[3].name)?.value)?.toString() as string;
+            let userID : string;
             if(interaction.options.getUser(archive.makeArchive.options[4].name)){
-                newArchiveLine += (interaction.options.getUser(archive.makeArchive.options[4].name)?.id)?.toString();
+                userID = (interaction.options.getUser(archive.makeArchive.options[4].name)?.id)?.toString() as string;
             } else {
-                newArchiveLine += "undefined";
+                userID = "undefined";
             }
 
+            newArchiveLine += "\n";
+            newArchiveLine += nextNumber;
+            newArchiveLine += "|";
+            newArchiveLine += content;
+            newArchiveLine += "|";
+            newArchiveLine += person;
+            newArchiveLine += "|";
+            newArchiveLine += date;
+            newArchiveLine += "|";
+            newArchiveLine += quizz;
+            newArchiveLine += "|";
+            newArchiveLine += userID;
+
             archiveChunk += newArchiveLine;
+
+            const response : MessageEmbed = new MessageEmbed()
+                .setColor("#64FF00")
+                .addFields(
+                    { name: content, value : person + ", " + date }
+                )
+                .setFooter({
+                    text : '#' + nextNumber
+                })
 
             fs.writeFile("src/data/archive/main.archive", archiveChunk, async (err : Error) => {
                 if (err) {
                   console.error(err);
                 }
 
-                const content = "Addad _" + newArchiveLine.slice(1) + "_ to the archive"
+                // const content = "Added _" + newArchiveLine.slice(1) + "_ to the archive"
     
-                await interaction.followUp({
-                    ephemeral: true,
-                    content
-                });
+                await interaction.followUp({embeds: [ response ]})
 
             });
 
         });
         
     }
-}; 
+};
