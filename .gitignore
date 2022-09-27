@@ -1,4 +1,5 @@
-src/data/
 node_modules/
 dist/
 auth.json
+
+src/data/
