@@ -21,11 +21,7 @@ export const viewRandomArchive: Command = {
             readStream.on('data', async function(chunk : string){
                 
                 archiveChunk = chunk;
-            
-                // getting all options of the command
-                const number     : string = (interaction.options.get(archive.editArchive.options[0].name)?.value as number).toString();
 
-                // searching in the archive for the number given
                 let archiveSplitted : string[] = archiveChunk.split("\n");
 
                 // get random line

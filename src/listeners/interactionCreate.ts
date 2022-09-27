@@ -15,7 +15,7 @@ export default (client: Client): void => {
 
 const handleSlashCommand = async (client: Client, interaction: BaseCommandInteraction): Promise<void> => {
     
-    console.log(interaction.type)
+    console.log(interaction.type);
         
     const slashCommand = Commands.find(c => c.name === interaction.commandName);
     
