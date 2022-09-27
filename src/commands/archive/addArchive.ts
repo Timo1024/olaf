@@ -1,6 +1,7 @@
 import { BaseCommandInteraction, Client, Message, MessageEmbed, User } from "discord.js";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
+import { printArchive } from "./archiveLib";
 var fs = require("fs");
 
 export const addArchive: Command = {
@@ -85,27 +86,14 @@ export const addArchive: Command = {
 
             archiveChunk += newArchiveLine;
 
-            const response : MessageEmbed = new MessageEmbed()
-                .setColor("#64FF00")
-                .addFields(
-                    { name: content, value : person + ", " + date }
-                )
-                .setFooter({
-                    text : '#' + nextNumber
-                })
+            const response : MessageEmbed = printArchive(number, content, person, date);
+            await interaction.followUp({embeds: [ response ]});
 
             fs.writeFile("src/data/archive/main.archive", archiveChunk, async (err : Error) => {
                 if (err) {
                   console.error(err);
                 }
-
-                // const content = "Added _" + newArchiveLine.slice(1) + "_ to the archive"
-    
-                await interaction.followUp({embeds: [ response ]})
-
             });
-
         });
-        
     }
 };

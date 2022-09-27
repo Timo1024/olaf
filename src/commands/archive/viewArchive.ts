@@ -1,6 +1,7 @@
 import { BaseCommandInteraction, Client, MessageEmbed } from "discord.js";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
+import { printArchive } from "./archiveLib";
 var fs = require("fs");
 
 export const viewArchive: Command = {
@@ -42,15 +43,8 @@ export const viewArchive: Command = {
                 const content : string = infos[1];
                 const person : string = infos[2];
                 const date : string = infos[3];
-    
-                const response : MessageEmbed = new MessageEmbed()
-                    .setColor("#64FF00")
-                    .addFields(
-                        { name: content, value : person + ", " + date }
-                    )
-                    .setFooter({
-                        text : '#' + number
-                    })
+
+                const response : MessageEmbed = printArchive(number, content, person, date);
     
                 await interaction.followUp({embeds: [ response ]});
 
@@ -61,9 +55,6 @@ export const viewArchive: Command = {
                     content: 'Didn\'t fing the quote. Use a number between 1 and ' + lastNumber, 
                     ephemeral: true })
             }
-
-
         });
-        
     }
 };

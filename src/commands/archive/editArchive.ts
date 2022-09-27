@@ -1,6 +1,7 @@
 import { BaseCommandInteraction, Client, MessageEmbed } from "discord.js";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
+import { printArchive } from "./archiveLib";
 var fs = require("fs");
 
 export const editArchive: Command = {
@@ -82,25 +83,19 @@ export const editArchive: Command = {
             });
 
             if(foundQuote){
+
                 // generating new file
                 let newArchive : string = newArchiveSplitted.join("\n");
     
-                const response : MessageEmbed = new MessageEmbed()
-                    .setColor("#64FF00")
-                    .addFields(
-                        { name: content, value : person + ", " + date }
-                    )
-                    .setFooter({
-                        text : '#' + number
-                    })
-    
+                const response : MessageEmbed = printArchive(number, content, person, date);
+                await interaction.followUp({embeds: [ response ]});
+
                 fs.writeFile("src/data/archive/main.archive", newArchive, async (err : Error) => {
                     if (err) {
                       console.error(err);
                     }
-        
-                    await interaction.followUp({embeds: [ response ]})
                 });
+
             } else {
                 let lastNumber : string = archiveSplitted.pop()?.split("|")[0] as string;
                 
@@ -108,9 +103,6 @@ export const editArchive: Command = {
                     content: 'Didn\'t fing the quote. For the number of the quote use a number between 1 and ' + lastNumber, 
                     ephemeral: true })
             }
-
-
         });
-        
     }
 };
