@@ -122,6 +122,16 @@
                     "description" : "tagged user (optional)"
                 }
             ]
+        },
+        "viewArchive" : {
+            "name" : "view-archive",
+            "description" : "Viewing a specific quote",
+            "options" : [
+                {
+                    "name" : "nr",
+                    "description" : "the number of the quote you want to see"
+                }
+            ]
         }
     }
 }
