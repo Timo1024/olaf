@@ -8,14 +8,20 @@ export function printArchive(
     date : string
     ) : MessageEmbed {
 
+        let contentWithLinebreaks : string = "";
+        let contentArray : string[] = content.split("\\n");
+        contentArray.forEach(line => {
+            contentWithLinebreaks += line + "\n";
+        });
+
         const response : MessageEmbed = new MessageEmbed()
             .setColor("#64FF00")
             .addFields(
-                { name: content, value : person + ", " + date }
+                { name: contentWithLinebreaks, value : person + ", " + date }
             )
             .setFooter({
                 text : '#' + number
             })
         
-        return response
+        return response;
     }
