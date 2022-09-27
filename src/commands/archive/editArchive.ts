@@ -104,7 +104,7 @@ export const editArchive: Command = {
                     await interaction.followUp({ 
                         content: 'Didn\'t fing the quote. For the number of the quote use a number between 1 and ' + lastNumber, 
                         ephemeral: true 
-                    })
+                    });
                 }
             });
         } else {

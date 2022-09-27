@@ -9,6 +9,7 @@ import { addArchive } from "./commands/archive/addArchive";
 import { editArchive } from "./commands/archive/editArchive";
 import { viewArchive } from "./commands/archive/viewArchive";
 import { viewRandomArchive } from "./commands/archive/viewRandomArchive";
+import { deleteArchive } from "./commands/archive/deleteArchive";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
@@ -23,5 +24,6 @@ export const Commands: (Command | UICommand)[] = [
     addArchive, 
     editArchive, 
     viewArchive,
-    viewRandomArchive
+    viewRandomArchive,
+    deleteArchive
 ];

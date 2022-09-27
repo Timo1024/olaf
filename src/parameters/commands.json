@@ -136,6 +136,16 @@
         "viewRandomArchive" : {
             "name" : "view-random-archive",
             "description" : "Viewing a random quote"
+        },
+        "deleteArchive" : {
+            "name" : "delete-archive",
+            "description" : "Deleting a specific quote",
+            "options" : [
+                {
+                    "name" : "nr",
+                    "description" : "the number of the quote you want to delete"
+                }
+            ]
         }
     }
 }
