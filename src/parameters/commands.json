@@ -132,6 +132,10 @@
                     "description" : "the number of the quote you want to see"
                 }
             ]
+        },
+        "viewRandomArchive" : {
+            "name" : "view-random-archive",
+            "description" : "Viewing a random quote"
         }
     }
 }

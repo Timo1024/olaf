@@ -8,6 +8,7 @@ import { Miesmuschel } from "./commands/miesmuschel";
 import { addArchive } from "./commands/archive/addArchive";
 import { editArchive } from "./commands/archive/editArchive";
 import { viewArchive } from "./commands/archive/viewArchive";
+import { viewRandomArchive } from "./commands/archive/viewRandomArchive";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
@@ -21,5 +22,6 @@ export const Commands: (Command | UICommand)[] = [
     MessageInfo, 
     addArchive, 
     editArchive, 
-    viewArchive
+    viewArchive,
+    viewRandomArchive
 ];
