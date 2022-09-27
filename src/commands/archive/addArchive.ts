@@ -98,7 +98,7 @@ export const addArchive: Command = {
         
                     fs.writeFile(path, archiveChunk, async (err : Error) => {
                         if (err) {
-                        console.error(err);
+                            console.error(err);
                         }
                     });
                 });

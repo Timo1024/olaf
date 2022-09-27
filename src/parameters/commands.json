@@ -146,6 +146,12 @@
                     "description" : "the number of the quote you want to delete"
                 }
             ]
+        },
+        "quizz" : {
+            "play" : {
+                "name" : "archive-quizz",
+                "description" : "Playing an archive quizz"
+            }
         }
     }
 }
