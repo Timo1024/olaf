@@ -52,18 +52,59 @@ export const addArchive: Command = {
         // checking if the user who used the command is a developer
         if(await developer(interaction)){
 
-            var readStream = fs.createReadStream("src/data/archive/main.archive", 'utf8');
-    
-            var archiveChunk : string;
-    
-            readStream.on('data', async function(chunk : string){
-                archiveChunk = chunk;
-    
-                let lastLine : string = archiveChunk.split("\n").slice(-1)[0];
-                const number : string = lastLine.split("|")[0];
-    
+            const path : string = "src/data/archive/main.archive";
+            
+            if(fs.existsSync(path)){
+                
+                var readStream = fs.createReadStream(path, 'utf8');
+                var archiveChunk : string;
+        
+                readStream.on('data', async function(chunk : string){
+                    archiveChunk = chunk;
+        
+                    let lastLine : string = archiveChunk.split("\n").slice(-1)[0];
+                    const number : string = lastLine.split("|")[0];
+        
+                    let newArchiveLine : string = "";
+                    const nextNumber : string = (parseInt(number)+1).toString();
+                    const content    : string = interaction.options.get(archive.makeArchive.options[0].name)?.value as string;
+                    const person     : string = interaction.options.get(archive.makeArchive.options[1].name)?.value as string;
+                    const date       : string = interaction.options.get(archive.makeArchive.options[2].name)?.value as string;
+                    const quizz      : string = (interaction.options.get(archive.makeArchive.options[3].name)?.value)?.toString() as string;
+                    let userID : string;
+                    if(interaction.options.getUser(archive.makeArchive.options[4].name)){
+                        userID = (interaction.options.getUser(archive.makeArchive.options[4].name)?.id)?.toString() as string;
+                    } else {
+                        userID = "undefined";
+                    }
+        
+                    newArchiveLine += "\n";
+                    newArchiveLine += nextNumber;
+                    newArchiveLine += "|";
+                    newArchiveLine += content;
+                    newArchiveLine += "|";
+                    newArchiveLine += person;
+                    newArchiveLine += "|";
+                    newArchiveLine += date;
+                    newArchiveLine += "|";
+                    newArchiveLine += quizz;
+                    newArchiveLine += "|";
+                    newArchiveLine += userID;
+        
+                    archiveChunk += newArchiveLine;
+        
+                    const response : MessageEmbed = printArchive(nextNumber, content, person, date);
+                    await interaction.followUp({embeds: [ response ]});
+        
+                    fs.writeFile(path, archiveChunk, async (err : Error) => {
+                        if (err) {
+                        console.error(err);
+                        }
+                    });
+                });
+            } else {
                 let newArchiveLine : string = "";
-                const nextNumber : string = (parseInt(number)+1).toString();
+                const nextNumber : string = "1";
                 const content    : string = interaction.options.get(archive.makeArchive.options[0].name)?.value as string;
                 const person     : string = interaction.options.get(archive.makeArchive.options[1].name)?.value as string;
                 const date       : string = interaction.options.get(archive.makeArchive.options[2].name)?.value as string;
@@ -75,7 +116,6 @@ export const addArchive: Command = {
                     userID = "undefined";
                 }
     
-                newArchiveLine += "\n";
                 newArchiveLine += nextNumber;
                 newArchiveLine += "|";
                 newArchiveLine += content;
@@ -87,18 +127,16 @@ export const addArchive: Command = {
                 newArchiveLine += quizz;
                 newArchiveLine += "|";
                 newArchiveLine += userID;
-    
-                archiveChunk += newArchiveLine;
-    
-                const response : MessageEmbed = printArchive(number, content, person, date);
+
+                const response : MessageEmbed = printArchive("1", content, person, date);
                 await interaction.followUp({embeds: [ response ]});
     
-                fs.writeFile("src/data/archive/main.archive", archiveChunk, async (err : Error) => {
+                fs.writeFile(path, newArchiveLine, async (err : Error) => {
                     if (err) {
-                      console.error(err);
+                        console.error(err);
                     }
                 });
-            });
+            }
 
         } else {
             // if user is not a developer

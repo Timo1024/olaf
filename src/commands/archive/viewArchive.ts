@@ -18,43 +18,53 @@ export const viewArchive: Command = {
     type: "CHAT_INPUT",
     run: async (client: Client, interaction: BaseCommandInteraction) => {
 
-        let readStream = fs.createReadStream("src/data/archive/main.archive", 'utf8');
+        const path : string = "src/data/archive/main.archive";
 
-        let archiveChunk : string;
+        if(fs.existsSync(path)){
 
-        readStream.on('data', async function(chunk : string){
-            archiveChunk = chunk;
+            let readStream = fs.createReadStream(path, 'utf8');
+
+            let archiveChunk : string;
+
+            readStream.on('data', async function(chunk : string){
+                archiveChunk = chunk;
+            
+                // getting all options of the command
+                const number     : string = (interaction.options.get(archive.editArchive.options[0].name)?.value as number).toString();
+
+                // searching in the archive for the number given
+                let archiveSplitted : string[] = archiveChunk.split("\n");
+                let quote : string = "";
+                archiveSplitted.forEach((line : string) => {
+                    if(line.startsWith(number + "|")){
+                        quote = line;
+                    }
+                });
+
+                if(quote !== ""){
+                    
+                    const infos : string[] = quote.split("|");
+                    const content : string = infos[1];
+                    const person : string = infos[2];
+                    const date : string = infos[3];
+
+                    const response : MessageEmbed = printArchive(number, content, person, date);
         
-            // getting all options of the command
-            const number     : string = (interaction.options.get(archive.editArchive.options[0].name)?.value as number).toString();
+                    await interaction.followUp({embeds: [ response ]});
 
-            // searching in the archive for the number given
-            let archiveSplitted : string[] = archiveChunk.split("\n");
-            let quote : string = "";
-            archiveSplitted.forEach((line : string) => {
-                if(line.startsWith(number + "|")){
-                    quote = line;
+                } else {
+                    let lastNumber : string = archiveSplitted.pop()?.split("|")[0] as string;
+                    
+                    await interaction.followUp({ 
+                        content: 'Didn\'t fing the quote. Use a number between 1 and ' + lastNumber, 
+                        ephemeral: true })
                 }
             });
-
-            if(quote !== ""){
-                
-                const infos : string[] = quote.split("|");
-                const content : string = infos[1];
-                const person : string = infos[2];
-                const date : string = infos[3];
-
-                const response : MessageEmbed = printArchive(number, content, person, date);
-    
-                await interaction.followUp({embeds: [ response ]});
-
-            } else {
-                let lastNumber : string = archiveSplitted.pop()?.split("|")[0] as string;
-                
-                await interaction.followUp({ 
-                    content: 'Didn\'t fing the quote. Use a number between 1 and ' + lastNumber, 
-                    ephemeral: true })
-            }
-        });
+        } else {
+            await interaction.followUp({ 
+                content: 'There are no quotes yet', 
+                ephemeral: true 
+            });
+        }
     }
 };
