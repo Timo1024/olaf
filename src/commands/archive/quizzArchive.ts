@@ -50,7 +50,7 @@ export const quizzArchive: Command = {
 					.setStyle('SECONDARY')
 			);
 
-        await interaction.followUp({
+        await interaction.reply({
             ephemeral: true,
             content: content,
             components: [row1, row2]

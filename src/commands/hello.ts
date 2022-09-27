@@ -11,7 +11,7 @@ export const Hello: Command = {
         
         const content : string = "Moin, werde grade wiederbelebt... und bin jetzt über einen externen Server online";
 
-        await interaction.followUp({
+        await interaction.reply({
             ephemeral: true,
             content
         });

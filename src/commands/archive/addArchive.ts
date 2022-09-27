@@ -94,7 +94,7 @@ export const addArchive: Command = {
                     archiveChunk += newArchiveLine;
         
                     const response : MessageEmbed = printArchive(nextNumber, content, person, date);
-                    await interaction.followUp({embeds: [ response ]});
+                    await interaction.reply({embeds: [ response ]});
         
                     fs.writeFile(path, archiveChunk, async (err : Error) => {
                         if (err) {
@@ -129,7 +129,7 @@ export const addArchive: Command = {
                 newArchiveLine += userID;
 
                 const response : MessageEmbed = printArchive("1", content, person, date);
-                await interaction.followUp({embeds: [ response ]});
+                await interaction.reply({embeds: [ response ]});
     
                 fs.writeFile(path, newArchiveLine, async (err : Error) => {
                     if (err) {
@@ -140,7 +140,7 @@ export const addArchive: Command = {
 
         } else {
             // if user is not a developer
-            await interaction.followUp({ 
+            await interaction.reply({ 
                 content: 'you don\'t have permission to use this command. If you want to add a quote contact a user with vip rank', 
                 ephemeral: true 
             });

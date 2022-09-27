@@ -60,6 +60,6 @@ export const UserInfo: Command = {
             response = new MessageEmbed().setDescription("guild id not defined")
         }
 
-        await interaction.followUp({embeds: [ response ]});
+        await interaction.reply({embeds: [ response ]});
     }
 };

@@ -50,18 +50,18 @@ export const viewArchive: Command = {
 
                     const response : MessageEmbed = printArchive(number, content, person, date);
         
-                    await interaction.followUp({embeds: [ response ]});
+                    await interaction.reply({embeds: [ response ]});
 
                 } else {
                     let lastNumber : string = archiveSplitted.pop()?.split("|")[0] as string;
                     
-                    await interaction.followUp({ 
+                    await interaction.reply({ 
                         content: 'Didn\'t fing the quote. Use a number between 1 and ' + lastNumber, 
                         ephemeral: true })
                 }
             });
         } else {
-            await interaction.followUp({ 
+            await interaction.reply({ 
                 content: 'There are no quotes yet', 
                 ephemeral: true 
             });

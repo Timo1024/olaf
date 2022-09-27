@@ -32,7 +32,7 @@ export const Miesmuschel: Command = {
 
         }
 
-        await interaction.followUp(
+        await interaction.reply(
             "Question:\t" + question + "\nAnswer:  \t " + response
         );
     }

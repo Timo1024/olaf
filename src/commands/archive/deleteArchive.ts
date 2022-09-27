@@ -57,7 +57,7 @@ export const deleteArchive: Command = {
                         let newArchive : string = newArchiveSplitted.join("\n");
             
                         const response : string = "Archive #" + number + " has been deleted";
-                        await interaction.followUp({ 
+                        await interaction.reply({ 
                             content: response, 
                             ephemeral: true 
                         });
@@ -71,21 +71,21 @@ export const deleteArchive: Command = {
                     } else {
                         let lastNumber : string = archiveSplitted.pop()?.split("|")[0] as string;
                         
-                        await interaction.followUp({ 
+                        await interaction.reply({ 
                             content: 'Didn\'t fing the quote. For the number of the quote use a number between 1 and ' + lastNumber, 
                             ephemeral: true 
                         })
                     }
                 });
             } else {
-                await interaction.followUp({ 
+                await interaction.reply({ 
                     content: 'There are no quotes yet', 
                     ephemeral: true 
                 });
             }
         } else {
             // if user is not a developer
-            await interaction.followUp({ 
+            await interaction.reply({ 
                 content: 'you don\'t have permission to use this command. If you want to edit this quote contact a user with vip rank', 
                 ephemeral: true 
             });

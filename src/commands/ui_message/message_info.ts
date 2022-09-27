@@ -51,7 +51,7 @@ export const MessageInfo: UICommand = {
 
         }
 
-        await interaction.followUp({
+        await interaction.reply({
             ephemeral: true, 
             embeds: [ response ]
         });

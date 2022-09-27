@@ -41,16 +41,16 @@ export const viewRandomArchive: Command = {
                     const date : string = infos[3];
         
                     const response : MessageEmbed = printArchive(number, content, person, date);
-                    await interaction.followUp({embeds: [ response ]});
+                    await interaction.reply({embeds: [ response ]});
 
                 } else {
-                    await interaction.followUp({ 
+                    await interaction.reply({ 
                         content: 'Didn\'t find the quote', 
                         ephemeral: true })
                 }
             });
         } else {
-            await interaction.followUp({ 
+            await interaction.reply({ 
                 content: 'There are no quotes yet', 
                 ephemeral: true 
             });
