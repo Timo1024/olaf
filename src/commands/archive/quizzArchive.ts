@@ -1,4 +1,5 @@
-import { MessageActionRow, MessageButton, BaseCommandInteraction, Client, Interaction, MessageComponentInteraction, MessageEmbed, ColorResolvable, InteractionCollector, GuildMember } from "discord.js";
+import { randomUUID } from "crypto";
+import { MessageActionRow, MessageButton, BaseCommandInteraction, Client, Interaction, MessageComponentInteraction, MessageEmbed, ColorResolvable, InteractionCollector, GuildMember, Guild } from "discord.js";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
@@ -81,23 +82,26 @@ export const quizzArchive: Command = {
                             other = "true";
                             break;
                     }
+
+                    // generate uuid v4
+                    const uuid : string = randomUUID();
                     
                     const row1 = new MessageActionRow()
                         .addComponents(
                             new MessageButton()
-                                .setCustomId(robin + "|robin|" + interaction.user.id)
+                                .setCustomId(robin + "|robin|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Robin')
                                 .setStyle('SECONDARY'),
                             new MessageButton()
-                                .setCustomId(cici + "|cici|" + interaction.user.id)
+                                .setCustomId(cici + "|cici|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Cici')
                                 .setStyle('SECONDARY'),
                             new MessageButton()
-                                .setCustomId(gizi + "|gizi|" + interaction.user.id)
+                                .setCustomId(gizi + "|gizi|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Gizi')
                                 .setStyle('SECONDARY'),
                             new MessageButton()
-                                .setCustomId(simon + "|simon|" + interaction.user.id)
+                                .setCustomId(simon + "|simon|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Simon')
                                 .setStyle('SECONDARY')
                         );
@@ -105,19 +109,19 @@ export const quizzArchive: Command = {
                     const row2 = new MessageActionRow()
                         .addComponents(
                             new MessageButton()
-                                .setCustomId(jojo + "|jojo|" + interaction.user.id)
+                                .setCustomId(jojo + "|jojo|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Jojo')
                                 .setStyle('SECONDARY'),
                             new MessageButton()
-                                .setCustomId(stefan + "|stefan|" + interaction.user.id)
+                                .setCustomId(stefan + "|stefan|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Stefan')
                                 .setStyle('SECONDARY'),
                             new MessageButton()
-                                .setCustomId(adrian + "|adrian|" + interaction.user.id)
+                                .setCustomId(adrian + "|adrian|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Adrian')
                                 .setStyle('SECONDARY'),
                             new MessageButton()
-                                .setCustomId(other + "|other|" + interaction.user.id)
+                                .setCustomId(other + "|other|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Other')
                                 .setStyle('SECONDARY')
                         );
@@ -126,22 +130,26 @@ export const quizzArchive: Command = {
                         ephemeral: false,
                         embeds: [response],
                         components: [row1, row2]
-                    }).then(() => {
-                        client.on("interactionCreate", async (interactionButton: Interaction) => {
-    
-                            if(!interactionButton.isButton()) return;
-                            
-                            if (!interactionButton.customId.endsWith(interactionButton.user.id)) {
-                                return interactionButton.reply({
-                                content: "This button is not for you",
-                                ephemeral: true
-                                })
-                            } else {
-                                await handleButton(client, interactionButton, number, content, person, date);
-                            }
-                    
-                        });
                     })
+
+                    const collector = interaction.channel?.createMessageComponentCollector({ componentType: "BUTTON", time: 60000 }) as InteractionCollector<MessageComponentInteraction>;
+
+                    collector.on('collect', async i => {
+                        if (i.user.id === interaction.user.id) {
+                            collector.stop();
+                            await handleButton(client, i, number, content, person, date);
+                        } else {
+                            i.reply({ 
+                                content: "This button is not for you", 
+                                ephemeral: true 
+                            });
+                        }
+                    });
+                    
+                    collector.on('end', collected => {
+                        console.log(`Collected ${collected.size} interactions.`);
+                        collector.stop();
+                    });
 
                 } else {
                     await interaction.reply({ 

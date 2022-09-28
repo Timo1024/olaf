@@ -6,7 +6,7 @@ import { token } from "./auth.json"
 console.log("Bot is starting...");
 
 const client = new Client({
-    intents: ["GUILD_MEMBERS"]
+    intents: ["GUILD_MEMBERS", "GUILDS"]
 });
 
 process.on("unhandledRejection", async (err) => {
