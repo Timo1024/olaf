@@ -1,4 +1,4 @@
-import { MessageActionRow, MessageButton, BaseCommandInteraction, Client, Interaction, MessageComponentInteraction, MessageEmbed, ColorResolvable } from "discord.js";
+import { MessageActionRow, MessageButton, BaseCommandInteraction, Client, Interaction, MessageComponentInteraction, MessageEmbed, ColorResolvable, InteractionCollector } from "discord.js";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
@@ -126,22 +126,23 @@ export const quizzArchive: Command = {
                         ephemeral: false,
                         embeds: [response],
                         components: [row1, row2]
-                    });
+                    }).then(() => {
+                        client.on("interactionCreate", async (interactionButton: Interaction) => {
+    
+                            if(!interactionButton.isButton()) return;
+                            
+                            if (!interactionButton.customId.endsWith(interactionButton.user.id)) {
+                                return interactionButton.reply({
+                                content: "This button is not for you",
+                                ephemeral: true
+                                })
+                            } else {
+                                await handleButton(client, interactionButton, number, content, person, date);
+                            }
+                    
+                        });
+                    })
 
-                    client.on("interactionCreate", async (interactionButton: Interaction) => {
-        
-                        if(!interactionButton.isButton()) return;
-                        
-                        if (!interactionButton.customId.endsWith(interactionButton.user.id)) {
-                            return interactionButton.reply({
-                            content: "This button is not for you",
-                            ephemeral: true
-                            })
-                        } else {
-                            await handleButton(client, interactionButton, number, content, person, date);
-                        }
-                
-                    });
                 } else {
                     await interaction.reply({ 
                         content: 'Didn\'t find the quote', 
@@ -162,14 +163,98 @@ const handleButton = async (client: Client, interaction: MessageComponentInterac
 
     // getColor
     let color : ColorResolvable;
-    console.log(interaction.customId)
+    let correct : boolean;
     if(interaction.customId.startsWith("true")){
         color = "#40ff00";
+        correct = true;
     } else {
         color = "#ff3600";
+        correct = false;
     }
 
     const response : MessageEmbed = printArchive(number, content, user, date, color);
-    await interaction.update({ components: [], embeds: [response] })
+    try {
+        await interaction.update({ components: [], embeds: [response] }).then(async () => {
 
+            const path : string = "src/data/archive/main.scores";
+
+            if(fs.existsSync(path)){
+
+                let readStream = fs.createReadStream(path, 'utf8');
+
+                let quizzChunk : string;
+
+                readStream.on('data', async function(chunk : string){
+                    quizzChunk = chunk;
+                
+                    let userID : string = interaction.user.id;
+
+                    // searching in the scores for the number given
+                    let quizzSplitted : string[] = quizzChunk.split("\n");
+                    let newQuizzSplitted : string[] = [];
+                    let foundScore : boolean = false;
+                    quizzSplitted.forEach((line : string) => {
+                        if(line.startsWith(userID + "|")){
+                            let lineSplitted : string[] = line.split("|");
+                            if(correct){
+                                lineSplitted[1] = (parseInt(lineSplitted[1])+1).toString();
+                            } else {
+                                lineSplitted[2] = (parseInt(lineSplitted[2])+1).toString();
+                            }
+                            line = lineSplitted.join("|");
+                            foundScore = true;
+                        }
+                        newQuizzSplitted.push(line)
+                    });
+
+                    if(foundScore){
+
+                        // generating new file
+                        let newQuizz : string = newQuizzSplitted.join("\n");
+
+                        fs.writeFile(path, newQuizz, async (err : Error) => {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
+
+                    } else {
+                        
+                        let line : string;
+                        if(correct){
+                            line = userID + "|1|0";
+                        } else {
+                            line = userID + "|0|1";
+                        }
+
+                        fs.writeFile(path, quizzChunk + "\n" + line, async (err : Error) => {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
+                        
+                    }
+                });
+            } else {
+
+                let userID : string = interaction.user.id;
+                let line : string;
+                if(correct){
+                    line = userID + "|1|0";
+                } else {
+                    line = userID + "|0|1";
+                }
+
+                fs.writeFile(path, line, async (err : Error) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
+
+        })
+    } catch (err) {
+        // FIXME this error should't appear
+        console.log("Interaction has already been acknowledged");
+    }
 }
