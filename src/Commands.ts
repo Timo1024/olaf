@@ -11,6 +11,7 @@ import { viewArchive } from "./commands/archive/viewArchive";
 import { viewRandomArchive } from "./commands/archive/viewRandomArchive";
 import { deleteArchive } from "./commands/archive/deleteArchive";
 import { quizzArchive } from "./commands/archive/quizzArchive";
+import { quizzLeaderboardArchive } from "./commands/archive/quizzLeaderboardArchive";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
@@ -27,5 +28,6 @@ export const Commands: (Command | UICommand)[] = [
     viewArchive,
     viewRandomArchive,
     deleteArchive,
-    quizzArchive
+    quizzArchive,
+    quizzLeaderboardArchive
 ];

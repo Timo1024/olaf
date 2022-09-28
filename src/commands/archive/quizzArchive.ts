@@ -1,4 +1,4 @@
-import { MessageActionRow, MessageButton, BaseCommandInteraction, Client, Interaction, MessageComponentInteraction, MessageEmbed, ColorResolvable, InteractionCollector } from "discord.js";
+import { MessageActionRow, MessageButton, BaseCommandInteraction, Client, Interaction, MessageComponentInteraction, MessageEmbed, ColorResolvable, InteractionCollector, GuildMember } from "discord.js";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
@@ -188,6 +188,13 @@ const handleButton = async (client: Client, interaction: MessageComponentInterac
                     quizzChunk = chunk;
                 
                     let userID : string = interaction.user.id;
+                    let name : string;
+                    if((interaction.member as GuildMember).nickname != null){
+                        name = (interaction.member as GuildMember).nickname as string;
+                    } else {
+                        name = interaction.user.username;
+                    }
+                    console.log((interaction.member as GuildMember).nickname);
 
                     // searching in the scores for the number given
                     let quizzSplitted : string[] = quizzChunk.split("\n");
@@ -201,6 +208,7 @@ const handleButton = async (client: Client, interaction: MessageComponentInterac
                             } else {
                                 lineSplitted[2] = (parseInt(lineSplitted[2])+1).toString();
                             }
+                            lineSplitted[3] = name;
                             line = lineSplitted.join("|");
                             foundScore = true;
                         }
@@ -222,9 +230,9 @@ const handleButton = async (client: Client, interaction: MessageComponentInterac
                         
                         let line : string;
                         if(correct){
-                            line = userID + "|1|0";
+                            line = userID + "|1|0|" + name;
                         } else {
-                            line = userID + "|0|1";
+                            line = userID + "|0|1|" + name;
                         }
 
                         fs.writeFile(path, quizzChunk + "\n" + line, async (err : Error) => {
@@ -238,11 +246,18 @@ const handleButton = async (client: Client, interaction: MessageComponentInterac
             } else {
 
                 let userID : string = interaction.user.id;
+                let name : string;
+                if((interaction.member as GuildMember).nickname != null){
+                    name = (interaction.member as GuildMember).nickname as string;
+                } else {
+                    name = interaction.user.username;
+                }
+
                 let line : string;
                 if(correct){
-                    line = userID + "|1|0";
+                    line = userID + "|1|0|" + name;
                 } else {
-                    line = userID + "|0|1";
+                    line = userID + "|0|1|" + name;
                 }
 
                 fs.writeFile(path, line, async (err : Error) => {
