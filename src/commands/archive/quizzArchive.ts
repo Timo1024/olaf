@@ -147,7 +147,6 @@ export const quizzArchive: Command = {
                     });
                     
                     collector.on('end', collected => {
-                        console.log(`Collected ${collected.size} interactions.`);
                         collector.stop();
                     });
 

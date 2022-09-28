@@ -90,10 +90,10 @@ export const quizzLeaderboardArchive: Command = {
                 let embedContentAddition : string;
                 if(type == "relative"){
                     embedHeading = "🏆 Archive Quizz Leaderboard (relative) 🏆";
-                    embedContentAddition = "%";
+                    embedContentAddition = "% of the time";
                 } else {
                     embedHeading = "🏆 Archive Quizz Leaderboard (absolute) 🏆";
-                    embedContentAddition = " Mal";
+                    embedContentAddition = " times";
                 }
 
                 const response : MessageEmbed = new MessageEmbed()
@@ -105,7 +105,7 @@ export const quizzLeaderboardArchive: Command = {
 
                     response.addFields([{
                         name: '\u200b',
-                        value: counter.toString() + ". " + line[3] + " hat " + line[1].toFixed(0) + embedContentAddition + " richtig geantwortet"
+                        value: counter.toString() + ". " + line[3] + " answered " + line[1].toFixed(0) + embedContentAddition + " correct"
                     }]);
 
                     counter++;
