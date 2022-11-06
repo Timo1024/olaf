@@ -73,7 +73,7 @@
             "options" : [
                 {
                     "name" : "content",
-                    "description" : "the quote"
+                    "description" : "the quote (use \"\\n\" to begin new line)"
                 },
                 {
                     "name" : "person",
@@ -157,7 +157,7 @@
                 "description" : "view the leaderboard of the archive quizz",
                 "options" : [
                     {
-                        "name" : "tpye",
+                        "name" : "type",
                         "description" : "show absolute or relative values in the leaderboard",
                         "choices" : [
                             {

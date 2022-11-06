@@ -56,7 +56,7 @@ export const viewArchive: Command = {
                     let lastNumber : string = archiveSplitted.pop()?.split("|")[0] as string;
                     
                     await interaction.reply({ 
-                        content: 'Didn\'t fing the quote. Use a number between 1 and ' + lastNumber, 
+                        content: 'Didn\'t find the quote. Use a number between 1 and ' + lastNumber, 
                         ephemeral: true })
                 }
             });
