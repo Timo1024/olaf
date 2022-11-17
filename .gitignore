@@ -1,3 +1,5 @@
 node_modules/
 dist/
 auth.json
+main.archive
+main.scores
