@@ -5,8 +5,18 @@
     },
 
     "canvas_test" : {
-        "name" : "canvas-test",
-        "description" : "Returns a canvas"
+        "name" : "heart",
+        "description" : "make a love heart for two people",
+        "options" : [
+            {
+                "name" : "letter1",
+                "description" : "the first letter"
+            },
+            {
+                "name" : "letter2",
+                "description" : "the second letter"
+            }
+        ]
     },
 
     "user_data" : {
