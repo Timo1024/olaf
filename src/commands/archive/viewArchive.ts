@@ -1,4 +1,5 @@
-import { BaseCommandInteraction, Client, MessageEmbed } from "discord.js";
+import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
@@ -11,12 +12,12 @@ export const viewArchive: Command = {
         {
             name: archive.viewArchive.options[0].name,
             description: archive.viewArchive.options[0].description,
-            type: "INTEGER",
+            type: ApplicationCommandOptionType.Integer,
             required: true
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
 
         const path : string = "src/data/archive/main.archive";
 
@@ -48,7 +49,7 @@ export const viewArchive: Command = {
                     const person : string = infos[2];
                     const date : string = infos[3];
 
-                    const response : MessageEmbed = printArchive(number, content, person, date);
+                    const response : EmbedBuilder = printArchive(number, content, person, date);
         
                     await interaction.reply({embeds: [ response ]});
 

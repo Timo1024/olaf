@@ -1,4 +1,5 @@
-import { BaseCommandInteraction, Client, MessageEmbed } from "discord.js";
+import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { developer } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
@@ -11,12 +12,12 @@ export const deleteArchive: Command = {
         {
             name: archive.deleteArchive.options[0].name,
             description: archive.deleteArchive.options[0].description,
-            type: "INTEGER",
+            type: ApplicationCommandOptionType.Integer,
             required: true
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
 
         // checking if the user who used the command is a developer
         if(await developer(interaction)){

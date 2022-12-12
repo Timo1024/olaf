@@ -1,4 +1,5 @@
-import { BaseCommandInteraction, Client, MessageEmbed } from "discord.js";
+import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { developer } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
@@ -12,42 +13,42 @@ export const editArchive: Command = {
         {
             name: archive.editArchive.options[0].name,
             description: archive.editArchive.options[0].description,
-            type: "INTEGER",
+            type: ApplicationCommandOptionType.Integer,
             required: true
         },
         {
             name: archive.editArchive.options[1].name,
             description: archive.editArchive.options[1].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: archive.editArchive.options[2].name,
             description: archive.editArchive.options[2].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: archive.editArchive.options[3].name,
             description: archive.editArchive.options[3].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: archive.editArchive.options[4].name,
             description: archive.editArchive.options[4].description,
-            type: "BOOLEAN",
+            type: ApplicationCommandOptionType.Boolean,
             required: true
         },
         {
             name: archive.editArchive.options[5].name,
             description: archive.editArchive.options[5].description,
-            type: "USER",
+            type: ApplicationCommandOptionType.User,
             required: false
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
 
         // checking if the user who used the command is a developer
         if(await developer(interaction)){
@@ -93,7 +94,7 @@ export const editArchive: Command = {
                         // generating new file
                         let newArchive : string = newArchiveSplitted.join("\n");
             
-                        const response : MessageEmbed = printArchive(number, content, person, date);
+                        const response : EmbedBuilder = printArchive(number, content, person, date);
                         await interaction.reply({embeds: [ response ]});
 
                         fs.writeFile(path, newArchive, async (err : Error) => {

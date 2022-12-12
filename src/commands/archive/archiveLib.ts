@@ -1,4 +1,4 @@
-import { ColorResolvable, MessageEmbed } from "discord.js";
+import { ColorResolvable, EmbedBuilder } from "discord.js";
 
 // returns an embed whch contains the quote
 export function printArchive(
@@ -7,7 +7,7 @@ export function printArchive(
     person : string,
     date : string,
     color : ColorResolvable = "#64FF00"
-    ) : MessageEmbed {
+    ) : EmbedBuilder {
 
         let contentWithLinebreaks : string = "";
         let contentArray : string[] = content.split("\\n");
@@ -15,7 +15,7 @@ export function printArchive(
             contentWithLinebreaks += line + "\n";
         });
 
-        const response : MessageEmbed = new MessageEmbed()
+        const response : EmbedBuilder = new EmbedBuilder()
             .setColor(color)
             .addFields(
                 { name: contentWithLinebreaks, value : person + ", " + date }

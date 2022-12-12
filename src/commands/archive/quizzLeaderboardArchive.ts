@@ -1,4 +1,5 @@
-import { BaseCommandInteraction, Client, GuildMember, MessageEmbed } from "discord.js";
+import { CommandInteraction, Client, GuildMember, EmbedBuilder } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { guild_id } from "../../parameters/server.json";
@@ -11,7 +12,7 @@ export const quizzLeaderboardArchive: Command = {
         {
             name: archive.quizz.leaderboard.options[0].name,
             description: archive.quizz.leaderboard.options[0].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true,
             choices: [
                 {
@@ -25,8 +26,8 @@ export const quizzLeaderboardArchive: Command = {
             ]
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
 
         const path : string = "src/data/archive/main.scores";
 
@@ -96,7 +97,7 @@ export const quizzLeaderboardArchive: Command = {
                     embedContentAddition = " times";
                 }
 
-                const response : MessageEmbed = new MessageEmbed()
+                const response : EmbedBuilder = new EmbedBuilder()
                     .setColor("#f6cc63")
                     .setTitle(embedHeading)
 

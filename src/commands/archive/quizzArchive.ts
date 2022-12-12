@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
-import { MessageActionRow, MessageButton, BaseCommandInteraction, Client, Interaction, MessageComponentInteraction, MessageEmbed, ColorResolvable, InteractionCollector, GuildMember, Guild } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, Client, Interaction, MessageComponentInteraction, EmbedBuilder, ColorResolvable, InteractionCollector, GuildMember, Guild, ButtonInteraction } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType, ComponentType } from 'discord.js';
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
@@ -8,8 +9,8 @@ var fs = require("fs");
 export const quizzArchive: Command = {
     name: archive.quizz.play.name,
     description: archive.quizz.play.description,
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
         
         // const content : string = "Hier steht ein Zitat";
 
@@ -44,7 +45,7 @@ export const quizzArchive: Command = {
                     const userID  : string = infos[5];
 
                     
-                    const response : MessageEmbed = printArchive(number, content, "???", date, "#ffcc00");
+                    const response : EmbedBuilder = printArchive(number, content, "???", date, "#ffcc00");
                     
                     // calculating which person said the quote
                     let robin : string  = "false";
@@ -86,53 +87,56 @@ export const quizzArchive: Command = {
                     // generate uuid v4
                     const uuid : string = randomUUID();
                     
-                    const row1 = new MessageActionRow()
+                    const row1 = new ActionRowBuilder<ButtonBuilder>()
                         .addComponents(
-                            new MessageButton()
+                            new ButtonBuilder()
                                 .setCustomId(robin + "|robin|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Robin')
-                                .setStyle('SECONDARY'),
-                            new MessageButton()
+                                .setStyle(ButtonStyle.Secondary),
+                            new ButtonBuilder()
                                 .setCustomId(cici + "|cici|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Cici')
-                                .setStyle('SECONDARY'),
-                            new MessageButton()
+                                .setStyle(ButtonStyle.Secondary),
+                            new ButtonBuilder()
                                 .setCustomId(gizi + "|gizi|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Gizi')
-                                .setStyle('SECONDARY'),
-                            new MessageButton()
+                                .setStyle(ButtonStyle.Secondary),
+                            new ButtonBuilder()
                                 .setCustomId(simon + "|simon|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Simon')
-                                .setStyle('SECONDARY')
+                                .setStyle(ButtonStyle.Secondary)
                         );
         
-                    const row2 = new MessageActionRow()
+                    const row2 = new ActionRowBuilder<ButtonBuilder>()
                         .addComponents(
-                            new MessageButton()
+                            new ButtonBuilder()
                                 .setCustomId(jojo + "|jojo|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Jojo')
-                                .setStyle('SECONDARY'),
-                            new MessageButton()
+                                .setStyle(ButtonStyle.Secondary),
+                            new ButtonBuilder()
                                 .setCustomId(stefan + "|stefan|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Stefan')
-                                .setStyle('SECONDARY'),
-                            new MessageButton()
+                                .setStyle(ButtonStyle.Secondary),
+                            new ButtonBuilder()
                                 .setCustomId(adrian + "|adrian|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Adrian')
-                                .setStyle('SECONDARY'),
-                            new MessageButton()
+                                .setStyle(ButtonStyle.Secondary),
+                            new ButtonBuilder()
                                 .setCustomId(other + "|other|" + uuid + "|" + interaction.user.id)
                                 .setLabel('Other')
-                                .setStyle('SECONDARY')
+                                .setStyle(ButtonStyle.Secondary)
                         );
         
                     await interaction.reply({
                         ephemeral: false,
                         embeds: [response],
                         components: [row1, row2]
-                    })
+                    });
 
-                    const collector = interaction.channel?.createMessageComponentCollector({ componentType: "BUTTON", time: 60000 }) as InteractionCollector<MessageComponentInteraction>;
+                    // changed from this
+                    // const collector = interaction.channel?.createMessageComponentCollector({ componentType: "BUTTON", time: 60000 }) as InteractionCollector<ButtonInteraction>;
+                    // to this after updating from v13 to v14
+                    const collector = interaction.channel?.createMessageComponentCollector({ componentType : ComponentType.Button, time: 60000 }) as InteractionCollector<ButtonInteraction>;
 
                     collector.on('collect', async i => {
                         if (i.user.id === interaction.user.id) {
@@ -179,7 +183,7 @@ const handleButton = async (client: Client, interaction: MessageComponentInterac
         correct = false;
     }
 
-    const response : MessageEmbed = printArchive(number, content, user, date, color);
+    const response : EmbedBuilder = printArchive(number, content, user, date, color);
     try {
         await interaction.update({ components: [], embeds: [response] }).then(async () => {
 

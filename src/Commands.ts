@@ -17,7 +17,7 @@ import { quizzLeaderboardArchive } from "./commands/archive/quizzLeaderboardArch
 import { MessageInfo } from "./commands/ui_message/message_info";
 
 // TODO for new command
-// add alls commands to this array
+// add all commands to this array
 export const Commands: (Command | UICommand)[] = [
     UserInfo, 
     Hello, 

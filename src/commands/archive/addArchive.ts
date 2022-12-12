@@ -1,4 +1,5 @@
-import { BaseCommandInteraction, Client, Message, MessageEmbed, User } from "discord.js";
+import { CommandInteraction, Client, Message, EmbedBuilder, User } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { developer } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
@@ -12,36 +13,36 @@ export const addArchive: Command = {
         {
             name: archive.makeArchive.options[0].name,
             description: archive.makeArchive.options[0].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: archive.makeArchive.options[1].name,
             description: archive.makeArchive.options[1].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: archive.makeArchive.options[2].name,
             description: archive.makeArchive.options[2].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: archive.makeArchive.options[3].name,
             description: archive.makeArchive.options[3].description,
-            type: "BOOLEAN",
+            type: ApplicationCommandOptionType.Boolean,
             required: true
         },
         {
             name: archive.makeArchive.options[4].name,
             description: archive.makeArchive.options[4].description,
-            type: "USER",
+            type: ApplicationCommandOptionType.User,
             required: false
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
         
         // fs.readFile("src/data/archive.archive", async function(err : Error, buf : any) {
         //     if (err) { console.log(err) }
@@ -93,7 +94,7 @@ export const addArchive: Command = {
         
                     archiveChunk += newArchiveLine;
         
-                    const response : MessageEmbed = printArchive(nextNumber, content, person, date);
+                    const response : EmbedBuilder = printArchive(nextNumber, content, person, date);
                     await interaction.reply({embeds: [ response ]});
         
                     fs.writeFile(path, archiveChunk, async (err : Error) => {
@@ -128,7 +129,7 @@ export const addArchive: Command = {
                 newArchiveLine += "|";
                 newArchiveLine += userID;
 
-                const response : MessageEmbed = printArchive("1", content, person, date);
+                const response : EmbedBuilder = printArchive("1", content, person, date);
                 await interaction.reply({embeds: [ response ]});
     
                 fs.writeFile(path, newArchiveLine, async (err : Error) => {
