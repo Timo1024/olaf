@@ -20,43 +20,38 @@ export const Ask: Command = {
     type: ApplicationCommandType.ChatInput,
     run: async (client: Client, interaction: CommandInteraction) => {
 
-        await interaction.deferReply();
-
         // let thisChannel : TextBasedChannel = interaction.channel as TextBasedChannel;
+        await interaction.deferReply();
         
         let question : string = "no question was asked, but I respond anyway..."
         question = interaction.options.get(chatgpt.ask.options[0].name)?.value as string
-        
-        // let response : string = "hello";
 
         const configuration = new Configuration({
             apiKey: openai_api_key
         });
 
         const openai = new OpenAIApi(configuration);
-
-        // console.log("question:");
-        // console.log(question);
         
-        const completion = await openai.createCompletion({
+        // const completion = await openai.createCompletion({
+        await openai.createCompletion({
             model: "text-davinci-003",
-            // model: "text-davinci-002",
             prompt: question,
             temperature: 0.7,
             max_tokens: 1000,
             top_p: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
+        }).then((completion) => {
+            interaction.editReply(
+                completion.data.choices[0].text as string
+            );
         })
 
-        console.log("response:");
-        console.log(completion.data.choices);
+        // console.log("response:");
+        // console.log(completion.data.choices);
 
-        // thisChannel.send(completion.data.choices[0].text as string);
-        // console.log(interaction);
-
-        await interaction.editReply(
-            completion.data.choices[0].text as string
-        );
+        // await interaction.editReply(
+        //     completion.data.choices[0].text as string
+        // );
     }
 };

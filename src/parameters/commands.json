@@ -2,7 +2,7 @@
     "chatgpt" : {
         "ask" :  {
             "name" : "ask",
-            "description" : "Write an question",
+            "description" : "Write a question",
             "options" : [
                 {
                     "name" : "question",
