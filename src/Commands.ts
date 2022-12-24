@@ -12,6 +12,7 @@ import { viewRandomArchive } from "./commands/archive/viewRandomArchive";
 import { deleteArchive } from "./commands/archive/deleteArchive";
 import { quizzArchive } from "./commands/archive/quizzArchive";
 import { quizzLeaderboardArchive } from "./commands/archive/quizzLeaderboardArchive";
+import { Ask } from "./commands/chatgpt/chatgpt";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
@@ -29,5 +30,6 @@ export const Commands: (Command | UICommand)[] = [
     viewRandomArchive,
     deleteArchive,
     quizzArchive,
-    quizzLeaderboardArchive
+    quizzLeaderboardArchive,
+    Ask
 ];
