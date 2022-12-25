@@ -42,6 +42,8 @@ export const Ask: Command = {
             frequency_penalty: 0,
             presence_penalty: 0,
         }).then((completion) => {
+            console.log("here should follow the edit of the reply:");
+            console.log(completion);
             interaction.editReply(
                 completion.data.choices[0].text as string
             );
