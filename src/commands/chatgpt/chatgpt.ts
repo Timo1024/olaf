@@ -43,7 +43,7 @@ export const Ask: Command = {
             presence_penalty: 0,
         }).then((completion) => {
             console.log("here should follow the edit of the reply:");
-            console.log(completion);
+            console.log(completion.data.choices);
             interaction.editReply(
                 completion.data.choices[0].text as string
             );
