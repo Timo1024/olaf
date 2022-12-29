@@ -34,7 +34,9 @@ export const Ask: Command = {
         
         // const completion = await openai.createCompletion({
         await openai.createCompletion({
-            model: "text-davinci-003",
+            model: "text-babbage-001",
+            // model: "text-ada-001",
+            // model: "text-davinci-003",
             prompt: question,
             temperature: 0.7,
             max_tokens: 1000,
@@ -45,7 +47,7 @@ export const Ask: Command = {
             console.log("here should follow the edit of the reply:");
             console.log(completion.data.choices);
             interaction.editReply(
-                completion.data.choices[0].text as string
+                completion.data.choices[0].text?.slice(0, 1999) as string
             );
         })
 
