@@ -1,4 +1,16 @@
 {
+    "chatgpt" : {
+        "ask" :  {
+            "name" : "ask",
+            "description" : "Write a question",
+            "options" : [
+                {
+                    "name" : "question",
+                    "description" : "Your question"
+                }
+            ]
+        }
+    }, 
     "hello" : {
         "name" : "hello",
         "description" : "Returns a greeting"
@@ -78,6 +90,115 @@
                 "ich geh mal eine rauchen",
                 "42"
             ]
+        }
+    },
+
+    "archive" : {
+        "makeArchive" : {
+            "name" : "add-archive",
+            "description" : "Adding a new archive entry",
+            "options" : [
+                {
+                    "name" : "content",
+                    "description" : "the quote (use \"\\n\" to begin new line)"
+                },
+                {
+                    "name" : "person",
+                    "description" : "the person/persons who said the quote"
+                },
+                {
+                    "name" : "time",
+                    "description" : "when the quote was said"
+                },
+                {
+                    "name" : "quizz",
+                    "description" : "if the quote should be in the quizz"
+                },
+                {
+                    "name" : "user",
+                    "description" : "tagged user (optional)"
+                }
+            ]
+        },
+        "editArchive" : {
+            "name" : "edit-archive",
+            "description" : "Editing a archive entry",
+            "options" : [
+                {
+                    "name" : "nr",
+                    "description" : "the number of the quote you want to edit"
+                },
+                {
+                    "name" : "content",
+                    "description" : "the quote"
+                },
+                {
+                    "name" : "person",
+                    "description" : "the person/persons who said the quote"
+                },
+                {
+                    "name" : "time",
+                    "description" : "when the quote was said"
+                },
+                {
+                    "name" : "quizz",
+                    "description" : "if the quote should be in the quizz"
+                },
+                {
+                    "name" : "user",
+                    "description" : "tagged user (optional)"
+                }
+            ]
+        },
+        "viewArchive" : {
+            "name" : "view-archive",
+            "description" : "Viewing a specific quote",
+            "options" : [
+                {
+                    "name" : "nr",
+                    "description" : "the number of the quote you want to see"
+                }
+            ]
+        },
+        "viewRandomArchive" : {
+            "name" : "view-random-archive",
+            "description" : "Viewing a random quote"
+        },
+        "deleteArchive" : {
+            "name" : "delete-archive",
+            "description" : "Deleting a specific quote",
+            "options" : [
+                {
+                    "name" : "nr",
+                    "description" : "the number of the quote you want to delete"
+                }
+            ]
+        },
+        "quizz" : {
+            "play" : {
+                "name" : "archive-quizz",
+                "description" : "Playing an archive quizz"
+            },
+            "leaderboard" : {
+                "name" : "leaderboard",
+                "description" : "view the leaderboard of the archive quizz",
+                "options" : [
+                    {
+                        "name" : "type",
+                        "description" : "show absolute or relative values in the leaderboard",
+                        "choices" : [
+                            {
+                                "name" : "absolute-values",
+                                "value" : "absolute"
+                            },
+                            {
+                                "name" : "relative-values",
+                                "value" : "relative"
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     }
 }

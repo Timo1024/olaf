@@ -1,5 +1,7 @@
 node_modules/
 dist/
 auth.json
-main.archive
-main.scores
+
+data/
+
+yarn-error.log

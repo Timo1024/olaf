@@ -1,4 +1,5 @@
-import { BaseCommandInteraction, Client, Guild, GuildMember, MessageEmbed, User } from "discord.js";
+import { CommandInteraction, Client, Guild, GuildMember, EmbedBuilder, User } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../Command";
 import { user_data } from "../parameters/commands.json";
 import { guild_id } from "../parameters/server.json";
@@ -10,13 +11,13 @@ export const UserInfo: Command = {
         {
             name: user_data.options[0].name,
             description: user_data.options[0].description,
-            type: "USER"
+            type: ApplicationCommandOptionType.User
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
         
-        let response : string | MessageEmbed;
+        let response : string | EmbedBuilder;
 
         const tagged_user : User | null = interaction.options.getUser(user_data.options[0].name);
         let user : User;
@@ -40,26 +41,28 @@ export const UserInfo: Command = {
 
             if(member){
 
-                response = new MessageEmbed()
+                response = new EmbedBuilder()
                     .setAuthor({
                         name: user.username
                     })
                     .setThumbnail(user.avatarURL() as string)
                     .setDescription("-----------------------------------------------------------")
                     .setColor("#64FF00")
-                    .addField("Full Username:", user.tag , true)
-                    .addField("Nickname:", member.nickname ? member.nickname : "no nickname" , true)
-                    .addField("ID:", user.id, false)
-                    .addField("Created at:", erstellt_date, true)
+                    .addFields(
+                        {name : "Full Username:", value : user.tag , inline : true},
+                        {name : "Nickname:", value : member.nickname ? member.nickname : "no nickname" , inline : true},
+                        {name : "ID:", value : user.id, inline : false},
+                        {name : "Created at:", value : erstellt_date, inline : true}
+                    )
 
             } else {
-                response = new MessageEmbed().setDescription("user id not defined")
+                response = new EmbedBuilder().setDescription("user id not defined")
             }
 
         } else {
-            response = new MessageEmbed().setDescription("guild id not defined")
+            response = new EmbedBuilder().setDescription("guild id not defined")
         }
 
-        await interaction.followUp({embeds: [ response ]});
+        await interaction.reply({embeds: [ response ]});
     }
 };

@@ -30,4 +30,7 @@
         "node_modules",
         "dist"
     ],
+    "lib": [
+        "es2017"
+    ]    
 }

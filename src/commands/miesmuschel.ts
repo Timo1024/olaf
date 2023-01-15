@@ -1,4 +1,5 @@
-import { BaseCommandInteraction, Client, Guild, GuildMember, MessageEmbed, User } from "discord.js";
+import { CommandInteraction, Client, Guild, GuildMember, EmbedBuilder, User } from "discord.js";
+import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../Command";
 import { miesmuschel } from "../parameters/commands.json";
 
@@ -9,12 +10,12 @@ export const Miesmuschel: Command = {
         {
             name: miesmuschel.options[0].name,
             description: miesmuschel.options[0].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
         
         let question : string = "no question was asked, but I respond anyway..."
         question = interaction.options.get(miesmuschel.options[0].name)?.value as string
@@ -32,7 +33,7 @@ export const Miesmuschel: Command = {
 
         }
 
-        await interaction.followUp(
+        await interaction.reply(
             "Question:\t" + question + "\nAnswer:  \t " + response
         );
     }

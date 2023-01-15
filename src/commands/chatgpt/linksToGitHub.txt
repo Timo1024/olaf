@@ -1,0 +1,4 @@
+// https://github.com/onury5506/Discord-ChatGPT-Bot/blob/master/index.js
+
+// https://github.com/imedra/discordCGPT => besser
+
