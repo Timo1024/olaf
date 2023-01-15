@@ -3,3 +3,5 @@ dist/
 auth.json
 
 data/
+
+yarn-error.log
