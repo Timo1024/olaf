@@ -1,8 +1,7 @@
-import { BaseCommandInteraction, Client } from "discord.js";
+import { CommandInteraction, Client, ApplicationCommandOptionType, ApplicationCommandType } from "discord.js";
 import { Command } from "../Command";
 import { canvas_test } from "../parameters/commands.json";
 import { createCanvas, loadImage } from "canvas";
-import { MessageAttachment } from "discord.js";
 
 // TODO make dev command only
 export const CanvasTest: Command = {
@@ -12,18 +11,20 @@ export const CanvasTest: Command = {
         {
             name: canvas_test.options[0].name,
             description: canvas_test.options[0].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         },
         {
             name: canvas_test.options[1].name,
             description: canvas_test.options[1].description,
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
         }
     ],
-    type: "CHAT_INPUT",
-    run: async (client: Client, interaction: BaseCommandInteraction) => {
+    type: ApplicationCommandType.ChatInput,
+    run: async (client: Client, interaction: CommandInteraction) => {
+
+        await interaction.deferReply();
 
         // get interaction values
         let firstLetter  = interaction.options.get(canvas_test.options[0].name)?.value as string
@@ -78,8 +79,9 @@ export const CanvasTest: Command = {
         ctx.fillText(txt, (can.width / 2) - (ctx.measureText(txt).width / 2), 330);
         ctx.strokeText(txt, (can.width / 2) - (ctx.measureText(txt).width / 2), 330);
 
-        const content = new MessageAttachment(can.toBuffer(), "image.png");
-
-        await interaction.editReply({ files: [content] });
+        await interaction.editReply({ files: [{
+            attachment: can.toBuffer(),
+            name: "image.png"
+        }] });
     }
 }; 
