@@ -10,6 +10,18 @@
                 }
             ]
         }
+    },
+    "dalle" : {
+        "image" :  {
+            "name" : "image",
+            "description" : "Returns a generated image",
+            "options" : [
+                {
+                    "name" : "description",
+                    "description" : "Write a description of an image"
+                }
+            ]
+        }
     }, 
     "hello" : {
         "name" : "hello",
