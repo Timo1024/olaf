@@ -22,7 +22,7 @@ process.on("multipleResolves", async (type, promise, reason) => {
     console.error("Multiple Resolves:\n", type, promise, reason);
 });
 
-ready(client);
+export const [Tags] = ready(client);
 interactionCreate(client);
 
 client.login(token);

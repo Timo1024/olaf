@@ -14,6 +14,8 @@ import { quizzArchive } from "./commands/archive/quizzArchive";
 import { quizzLeaderboardArchive } from "./commands/archive/quizzLeaderboardArchive";
 import { Ask } from "./commands/chatgpt/chatgpt";
 import { CanvasTest } from "./commands/canvas_test";
+import { AddTag } from "./commands/database/addTag";
+import { ViewTag } from "./commands/database/getTag";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
@@ -33,5 +35,7 @@ export const Commands: (Command | UICommand)[] = [
     quizzArchive,
     quizzLeaderboardArchive,
     Ask,
-    CanvasTest
+    CanvasTest,
+    AddTag,
+    ViewTag
 ];

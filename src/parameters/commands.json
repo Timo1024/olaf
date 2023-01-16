@@ -1,4 +1,30 @@
 {
+    "database" : {
+        "add" : {
+            "name" : "addtag",
+            "description" : "adding a new tag to TAG databases",
+            "options" : [
+                {
+                    "name" : "name",
+                    "description" : "the name of the tag"
+                },
+                {
+                    "name" : "description",
+                    "description" : "the description of the tag"
+                }
+            ]
+        },
+        "view" : {
+            "name" : "viewtag",
+            "description" : "viewing a tag of the TAG database",
+            "options" : [
+                {
+                    "name" : "id",
+                    "description" : "the id of the tag you want to view"
+                }
+            ]
+        }
+    },
     "chatgpt" : {
         "ask" :  {
             "name" : "ask",

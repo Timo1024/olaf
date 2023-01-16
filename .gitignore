@@ -5,3 +5,5 @@ auth.json
 data/
 
 yarn-error.log
+
+**/*.sqlite
