@@ -4,7 +4,6 @@ import { Command } from "../../Command";
 import { dalle } from "../../parameters/commands.json";
 import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
-import { Stream } from "stream";
 
 export const ImageDallE: Command = {
     name: dalle.image.name,
