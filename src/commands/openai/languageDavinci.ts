@@ -1,7 +1,7 @@
 import { CommandInteraction, Client, Guild, GuildMember, EmbedBuilder, User, TextBasedChannel } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../../Command";
-import { openai as ai } from "../../parameters/commands.json";
+import { openai as ai} from "../../parameters/commands.json";
 import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
 import { Channel } from "diagnostics_channel";

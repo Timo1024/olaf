@@ -1,17 +1,17 @@
 import { CommandInteraction, Client, Guild, GuildMember, EmbedBuilder, User, TextBasedChannel } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType, AttachmentBuilder  } from 'discord.js';
 import { Command } from "../../Command";
-import { dalle } from "../../parameters/commands.json";
+import { openai as ai } from "../../parameters/commands.json";
 import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
 
 export const ImageDallE: Command = {
-    name: dalle.image.name,
-    description: dalle.image.description,
+    name: ai.dalle.image.name,
+    description: ai.dalle.image.description,
     options: [
         {
-            name: dalle.image.options[0].name,
-            description: dalle.image.options[0].description,
+            name: ai.dalle.image.options[0].name,
+            description: ai.dalle.image.options[0].description,
             type: ApplicationCommandOptionType.String,
             required: true
         }
@@ -23,7 +23,7 @@ export const ImageDallE: Command = {
         await interaction.deferReply();
         
         let question : string = "no question was asked, but I respond anyway..."
-        question = interaction.options.get(dalle.image.options[0].name)?.value as string
+        question = interaction.options.get(ai.dalle.image.options[0].name)?.value as string
 
         const configuration = new Configuration({
             apiKey: openai_api_key

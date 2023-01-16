@@ -1,28 +1,42 @@
 {
-    "chatgpt" : {
-        "ask" :  {
-            "name" : "ask",
-            "description" : "Write a question",
-            "options" : [
-                {
-                    "name" : "question",
-                    "description" : "Your question"
-                }
-            ]
+    "openai" : {
+        "babbage" : {
+            "ask" :  {
+                "name" : "askbabbage",
+                "description" : "Ask Babbage a question",
+                "options" : [
+                    {
+                        "name" : "question",
+                        "description" : "Your question"
+                    }
+                ]
+            }
+        },
+        "davinci" : {
+            "ask" :  {
+                "name" : "askdavinci",
+                "description" : "Ask Davinci a question",
+                "options" : [
+                    {
+                        "name" : "question",
+                        "description" : "Your question"
+                    }
+                ]
+            }
+        },
+        "dalle" : {
+            "image" :  {
+                "name" : "image",
+                "description" : "Returns a generated image",
+                "options" : [
+                    {
+                        "name" : "description",
+                        "description" : "Write a description of an image"
+                    }
+                ]
+            }
         }
     },
-    "dalle" : {
-        "image" :  {
-            "name" : "image",
-            "description" : "Returns a generated image",
-            "options" : [
-                {
-                    "name" : "description",
-                    "description" : "Write a description of an image"
-                }
-            ]
-        }
-    }, 
     "hello" : {
         "name" : "hello",
         "description" : "Returns a greeting"
