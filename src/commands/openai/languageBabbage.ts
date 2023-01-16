@@ -6,7 +6,7 @@ import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
 import { Channel } from "diagnostics_channel";
 
-export const Ask: Command = {
+export const AskBabbage: Command = {
     name: ai.babbage.ask.name,
     description: ai.babbage.ask.description,
     options: [

@@ -6,13 +6,13 @@ import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
 import { Channel } from "diagnostics_channel";
 
-export const Ask: Command = {
-    name: ai.babbage.ask.name,
-    description: ai.babbage.ask.description,
+export const AskDavinci: Command = {
+    name: ai.davinci.ask.name,
+    description: ai.davinci.ask.description,
     options: [
         {
-            name: ai.babbage.ask.options[0].name,
-            description: ai.babbage.ask.options[0].description,
+            name: ai.davinci.ask.options[0].name,
+            description: ai.davinci.ask.options[0].description,
             type: ApplicationCommandOptionType.String,
             required: true
         }
@@ -24,7 +24,7 @@ export const Ask: Command = {
         await interaction.deferReply();
         
         let question : string = "no question was asked, but I respond anyway..."
-        question = interaction.options.get(ai.babbage.ask.options[0].name)?.value as string
+        question = interaction.options.get(ai.davinci.ask.options[0].name)?.value as string
 
         const configuration = new Configuration({
             apiKey: openai_api_key
@@ -34,7 +34,7 @@ export const Ask: Command = {
         
         // const completion = await openai.createCompletion({
         await openai.createCompletion({
-            model: "text-babbage-001",
+            model: "text-davinci-003",
             // model: "text-ada-001",
             // model: "text-davinci-003",
             prompt: question,
