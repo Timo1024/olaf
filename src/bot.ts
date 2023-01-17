@@ -1,12 +1,21 @@
-import { Client } from "discord.js";
+import { Client, Events, Message } from "discord.js";
 import ready from "./listeners/ready";
 import interactionCreate from "./listeners/interactionCreate";
+import messageCreate from "./listeners/messageCreate";
 import { token } from "./auth.json";
 
 console.log("Bot is starting...");
 
 const client = new Client({
-    intents: ["GuildMembers", "Guilds"]
+    intents: [
+        "GuildMembers", 
+        "Guilds",
+        "DirectMessages",
+        "DirectMessageReactions",
+        "GuildMessages",
+        "GuildMessageReactions",
+        "MessageContent"
+    ]
 });
 
 process.on("unhandledRejection", async (err) => {
@@ -24,5 +33,6 @@ process.on("multipleResolves", async (type, promise, reason) => {
 
 ready(client);
 interactionCreate(client);
+messageCreate(client);
 
 client.login(token);
