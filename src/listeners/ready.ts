@@ -2,7 +2,7 @@ import { Client, Events } from "discord.js";
 import { Commands } from "../Commands";
 import { Sequelize, DataTypes, Model, ModelCtor } from "sequelize";
 
-export default (client: Client): void => {
+export default (client: Client): ModelCtor<Model<any, any>>[] => {
 
     // initialize database
     const sequelize = new Sequelize('database', 'user', 'password', {
@@ -23,7 +23,7 @@ export default (client: Client): void => {
             Databases.push(
                 sequelize.define(guildID, {
                     userID: {
-                        type: DataTypes.INTEGER,
+                        type: DataTypes.STRING,
                         unique: true,
                     },
                     tokens: {
@@ -54,6 +54,8 @@ export default (client: Client): void => {
         console.log(`${client.user.username} is online`);
 
     });
+
+    return Databases
 
 
 };

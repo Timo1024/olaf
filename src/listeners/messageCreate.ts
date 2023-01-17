@@ -15,7 +15,7 @@ export default (client: Client): void => {
 const handleMessage = async (client: Client, message: Message): Promise<void> => {
     
     if (!message.author.bot) {
-        addMessageXPToUser(message);
+        addMessageXPToUser(message, client);
     }
 
 };

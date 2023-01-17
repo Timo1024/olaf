@@ -31,7 +31,7 @@ process.on("multipleResolves", async (type, promise, reason) => {
     console.error("Multiple Resolves:\n", type, promise, reason);
 });
 
-ready(client);
+export const Databases = ready(client);
 interactionCreate(client);
 messageCreate(client);
 
