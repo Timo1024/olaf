@@ -28,6 +28,8 @@
     "discord-api-types": "^0.37.21",
     "discord.js": "^14.7.1",
     "discordx": "^11.5.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "sequelize": "^6.28.0",
+    "sqlite3": "^5.1.4"
   }
 }
