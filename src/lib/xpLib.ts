@@ -5,7 +5,7 @@ import { Databases } from "../bot";
 // adds it to the xp Amount of this user
 export async function addMessageXPToUser(message : Message, client : Client){
 
-    if(message.guild){
+    if(message.guild && !message.author.bot){
 
         // calculate the xp which the uder gets
         const xpAmount = 5 + Math.min(message.content.length/5, 5);
