@@ -74,7 +74,7 @@ export async function updateLevelAndTokens(guildID: string, userID: string) {
             user.increment("tokens", { by: newTokens });
 
             console.log("user levelled up");
-            console.log("added " + newTokens + " Token(s) to the user");
+            console.log("added " + newTokens + " Token(s) to the user b/c of level up");
             
             
 
@@ -84,6 +84,53 @@ export async function updateLevelAndTokens(guildID: string, userID: string) {
         console.log("didn't fint user in database");
     }
 
+}
+
+export async function updateTokens(guildID: string, userID: string, amount : number) : Promise<void> {
+    
+    // getting the user
+    const Table = Databases.filter(x => x.name === guildID)[0];
+    const user = await Table.findOne({ where: { userID: userID } });
+
+    if(user){
+
+        // check that tokens can't go below 0
+        const tokens   : number = user.get("tokens") as number;
+        if(tokens + amount >= 0){
+            user.increment("tokens", { by: amount });
+    
+            console.log("updated tokens b/c of command usage");
+        } else {
+            console.log("user doesn't have enough tokens");
+        }
+
+    } else {
+        console.log("didn't fint user in database");
+    }
+
+}
+
+export async function checkIfEnoughTokens(guildID: string, userID: string, amountToRemove : number) : Promise<boolean> {
+
+    // getting the user
+    const Table = Databases.filter(x => x.name === guildID)[0];
+    const user = await Table.findOne({ where: { userID: userID } });
+
+    if(user){
+
+        // check that tokens can't go below 0
+        const tokens   : number = user.get("tokens") as number;
+        if(tokens - amountToRemove >= 0){    
+            return true;
+        } else {
+            console.log("user doesn't have enough tokens");
+            return false;
+        }
+
+    } else {
+        console.log("didn't fint user in database");
+        return false;
+    }
 }
 
 

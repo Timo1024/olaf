@@ -3,6 +3,7 @@ import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js
 import { Command } from "../Command";
 import { miesmuschel } from "../parameters/commands.json";
 import { makeDescription } from "../lib/generalLib";
+import { updateTokens } from "../lib/xpLib";
 
 export const Miesmuschel: Command = {
     name: miesmuschel.name,
@@ -37,6 +38,9 @@ export const Miesmuschel: Command = {
         await interaction.reply(
             "Question:\t" + question + "\nAnswer:  \t " + response
         );
+
+        updateTokens(interaction.guild?.id as string, interaction.user.id, 1);
+
     }
 };
 

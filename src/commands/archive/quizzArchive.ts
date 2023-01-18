@@ -5,6 +5,7 @@ import { makeDescription } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
+import { updateTokens } from "../../lib/xpLib";
 var fs = require("fs");
 
 export const quizzArchive: Command = {
@@ -279,7 +280,11 @@ const handleButton = async (client: Client, interaction: MessageComponentInterac
                 });
             }
 
-        })
+        });
+
+        // update tokens when won
+        if(correct) updateTokens(interaction.guild?.id as string, interaction.user.id, 1);
+
     } catch (err) {
         // FIXME this error should't appear
         console.log("Interaction has already been acknowledged");
