@@ -10,6 +10,21 @@
                 }
             ],
             "tokens" : 0
+        },
+        "tradeTokens" : {
+            "name" : "trade",
+            "description" : "trade an amount of your tokens with somebody",
+            "options" : [
+                {
+                    "name" : "amount",
+                    "description" : "The amount of tokens you want to trade"
+                },
+                {
+                    "name" : "user",
+                    "description" : "The user you want to give the tokens to"
+                }
+            ],
+            "tokens" : 0
         }
     },
     "openai" : {

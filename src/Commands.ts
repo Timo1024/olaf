@@ -16,6 +16,7 @@ import { AskBabbage } from "./commands/openai/languageBabbage";
 import { AskDavinci } from "./commands/openai/languageDavinci";
 import { ImageDallE } from "./commands/openai/imageDalle";
 import { XPOverview } from "./commands/xpSystem/getOverview";
+import { TradeTokens } from "./commands/xpSystem/tradeTokens";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
@@ -37,5 +38,6 @@ export const Commands: (Command | UICommand)[] = [
     AskBabbage,
     AskDavinci,
     ImageDallE,
-    XPOverview
+    XPOverview,
+    TradeTokens
 ];
