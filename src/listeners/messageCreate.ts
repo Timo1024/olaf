@@ -1,6 +1,6 @@
 import { CommandInteraction, Client, Interaction, Events, Message } from "discord.js";
 import { Commands } from "../Commands";
-import { addMessageXPToUser } from "../commandsPassive/messageXP";
+import { addMessageXPToUser } from "../lib/xpLib";
 
 export default (client: Client): void => {
 

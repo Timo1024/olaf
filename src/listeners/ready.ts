@@ -27,12 +27,17 @@ export default (client: Client): ModelCtor<Model<any, any>>[] => {
                         unique: true,
                     },
                     tokens: {
-                        type: DataTypes.INTEGER,
+                        type: DataTypes.FLOAT(10, 0),
                         defaultValue: 0,
                         allowNull: false,
                     },
                     xp: {
                         type: DataTypes.INTEGER,
+                        defaultValue: 0,
+                        allowNull: false,
+                    },
+                    level: {
+                        type: DataTypes.FLOAT(10, 0),
                         defaultValue: 0,
                         allowNull: false,
                     },
