@@ -3,11 +3,12 @@ import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
+import { makeDescription } from "../../lib/generalLib";
 var fs = require("fs");
 
 export const viewRandomArchive: Command = {
     name: archive.viewRandomArchive.name,
-    description: archive.viewRandomArchive.description,
+    description: makeDescription(archive.viewRandomArchive),
     type: ApplicationCommandType.ChatInput,
     run: async (client: Client, interaction: CommandInteraction) => {
 

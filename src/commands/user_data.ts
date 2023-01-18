@@ -3,10 +3,11 @@ import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js
 import { Command } from "../Command";
 import { user_data } from "../parameters/commands.json";
 import { guild_id } from "../parameters/server.json";
+import { makeDescription } from "../lib/generalLib";
 
 export const UserInfo: Command = {
     name: user_data.name,
-    description: user_data.description,
+    description: makeDescription(user_data),
     options: [
         {
             name: user_data.options[0].name,

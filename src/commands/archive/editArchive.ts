@@ -1,6 +1,6 @@
 import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
-import { developer } from "../../lib/generalLib";
+import { developer, makeDescription } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
@@ -8,7 +8,7 @@ var fs = require("fs");
 
 export const editArchive: Command = {
     name: archive.editArchive.name,
-    description: archive.editArchive.description,
+    description: makeDescription(archive.editArchive),
     options: [
         {
             name: archive.editArchive.options[0].name,

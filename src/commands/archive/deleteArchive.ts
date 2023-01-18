@@ -1,13 +1,13 @@
 import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
-import { developer } from "../../lib/generalLib";
+import { developer, makeDescription } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 var fs = require("fs");
 
 export const deleteArchive: Command = {
     name: archive.deleteArchive.name,
-    description: archive.deleteArchive.description,
+    description: makeDescription(archive.deleteArchive),
     options: [
         {
             name: archive.deleteArchive.options[0].name,

@@ -2,11 +2,12 @@ import { CommandInteraction, Client } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../Command";
 import { hello } from "../parameters/commands.json"
+import { makeDescription } from "../lib/generalLib";
 
 // TODO make dev command only
 export const Hello: Command = {
     name: hello.name,
-    description: hello.description,
+    description: makeDescription(hello),
     type: ApplicationCommandType.ChatInput,
     run: async (client: Client, interaction: CommandInteraction) => {
         

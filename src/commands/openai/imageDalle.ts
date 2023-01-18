@@ -4,10 +4,11 @@ import { Command } from "../../Command";
 import { openai as ai } from "../../parameters/commands.json";
 import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
+import { makeDescription } from "../../lib/generalLib";
 
 export const ImageDallE: Command = {
     name: ai.dalle.image.name,
-    description: ai.dalle.image.description,
+    description: makeDescription(ai.dalle.image),
     options: [
         {
             name: ai.dalle.image.options[0].name,

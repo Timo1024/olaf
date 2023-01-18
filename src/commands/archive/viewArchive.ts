@@ -3,11 +3,12 @@ import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
+import { makeDescription } from "../../lib/generalLib";
 var fs = require("fs");
 
 export const viewArchive: Command = {
     name: archive.viewArchive.name,
-    description: archive.viewArchive.description,
+    description: makeDescription(archive.viewArchive),
     options: [
         {
             name: archive.viewArchive.options[0].name,

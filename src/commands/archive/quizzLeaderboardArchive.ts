@@ -1,5 +1,6 @@
 import { CommandInteraction, Client, GuildMember, EmbedBuilder } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
+import { makeDescription } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { guild_id } from "../../parameters/server.json";
@@ -7,7 +8,7 @@ var fs = require("fs");
 
 export const quizzLeaderboardArchive: Command = {
     name: archive.quizz.leaderboard.name,
-    description: archive.quizz.leaderboard.description,
+    description: makeDescription(archive.quizz.leaderboard),
     options: [
         {
             name: archive.quizz.leaderboard.options[0].name,

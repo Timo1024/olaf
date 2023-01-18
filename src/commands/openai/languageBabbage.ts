@@ -4,11 +4,11 @@ import { Command } from "../../Command";
 import { openai as ai } from "../../parameters/commands.json";
 import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
-import { Channel } from "diagnostics_channel";
+import { makeDescription } from "../../lib/generalLib";
 
 export const AskBabbage: Command = {
     name: ai.babbage.ask.name,
-    description: ai.babbage.ask.description,
+    description: makeDescription(ai.babbage.ask),
     options: [
         {
             name: ai.babbage.ask.options[0].name,

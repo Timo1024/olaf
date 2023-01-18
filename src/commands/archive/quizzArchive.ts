@@ -1,6 +1,7 @@
 import { randomUUID } from "crypto";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, Client, Interaction, MessageComponentInteraction, EmbedBuilder, ColorResolvable, InteractionCollector, GuildMember, Guild, ButtonInteraction } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType, ComponentType } from 'discord.js';
+import { makeDescription } from "../../lib/generalLib";
 import { Command } from "../../Command";
 import { archive } from "../../parameters/commands.json";
 import { printArchive } from "./archiveLib";
@@ -8,7 +9,7 @@ var fs = require("fs");
 
 export const quizzArchive: Command = {
     name: archive.quizz.play.name,
-    description: archive.quizz.play.description,
+    description: makeDescription(archive.quizz.play),
     type: ApplicationCommandType.ChatInput,
     run: async (client: Client, interaction: CommandInteraction) => {
         

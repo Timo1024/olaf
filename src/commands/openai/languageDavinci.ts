@@ -4,11 +4,11 @@ import { Command } from "../../Command";
 import { openai as ai} from "../../parameters/commands.json";
 import { openai_api_key } from "../../auth.json";
 import { Configuration, OpenAIApi } from "openai";
-import { Channel } from "diagnostics_channel";
+import { makeDescription } from "../../lib/generalLib";
 
 export const AskDavinci: Command = {
     name: ai.davinci.ask.name,
-    description: ai.davinci.ask.description,
+    description: makeDescription(ai.davinci.ask),
     options: [
         {
             name: ai.davinci.ask.options[0].name,

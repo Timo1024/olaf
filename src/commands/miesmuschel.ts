@@ -2,10 +2,11 @@ import { CommandInteraction, Client, Guild, GuildMember, EmbedBuilder, User } fr
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../Command";
 import { miesmuschel } from "../parameters/commands.json";
+import { makeDescription } from "../lib/generalLib";
 
 export const Miesmuschel: Command = {
     name: miesmuschel.name,
-    description: miesmuschel.description,
+    description: makeDescription(miesmuschel),
     options: [
         {
             name: miesmuschel.options[0].name,
