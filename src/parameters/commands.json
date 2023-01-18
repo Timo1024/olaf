@@ -1,4 +1,17 @@
 {
+    "xp" : {
+        "getXPOverview" : {
+            "name" : "getoverview",
+            "description" : "get an overview of xp, level an tokens",
+            "options" : [
+                {
+                    "name" : "user",
+                    "description" : "If you don't tag a user you get your own information"
+                }
+            ],
+            "tokens" : 0
+        }
+    },
     "openai" : {
         "babbage" : {
             "ask" :  {

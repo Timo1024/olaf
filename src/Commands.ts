@@ -15,6 +15,7 @@ import { quizzLeaderboardArchive } from "./commands/archive/quizzLeaderboardArch
 import { AskBabbage } from "./commands/openai/languageBabbage";
 import { AskDavinci } from "./commands/openai/languageDavinci";
 import { ImageDallE } from "./commands/openai/imageDalle";
+import { XPOverview } from "./commands/xpSystem/getOverview";
 
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
@@ -35,5 +36,6 @@ export const Commands: (Command | UICommand)[] = [
     quizzLeaderboardArchive,
     AskBabbage,
     AskDavinci,
-    ImageDallE
+    ImageDallE,
+    XPOverview
 ];
