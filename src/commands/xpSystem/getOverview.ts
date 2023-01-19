@@ -1,9 +1,10 @@
-import { CommandInteraction, Client, User } from "discord.js";
+import { CommandInteraction, Client, User, Guild } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../../Command";
 import { xp } from "../../parameters/commands.json"
 import { makeDescription } from "../../lib/generalLib";
 import { Databases } from "../../bot";
+import { makeXPCard } from "../../lib/canvasLib";
 
 // TODO make dev command only
 export const XPOverview: Command = {
@@ -19,6 +20,8 @@ export const XPOverview: Command = {
     type: ApplicationCommandType.ChatInput,
     run: async (client: Client, interaction: CommandInteraction) => {
 
+        await interaction.deferReply();
+
         // get user
         const tagged_user : User | null = interaction.options.getUser(xp.getXPOverview.options[0].name);
         let userID : string;
@@ -27,6 +30,8 @@ export const XPOverview: Command = {
         } else {
             userID = interaction.user.id;
         }
+
+        const canvasBuffer : Buffer = await makeXPCard(tagged_user ? tagged_user : interaction.user, (interaction.guild as Guild).id, client);
         
         const Table = Databases.filter(x => x.name === interaction.guild?.id)[0];
         const user = await Table.findOne({ where: { userID: userID } });
@@ -36,13 +41,14 @@ export const XPOverview: Command = {
             const tokens   : number = user.get("tokens") as number;
             const level    : number = user.get("level")  as number;
             
-            const content : string = "You are lvl " + level + " with " + xp + " XP. And you have " + tokens + " Token(s) left over to use.";
+            // const content : string = "You are lvl " + level + " with " + xp + " XP. And you have " + tokens + " Token(s) left over to use.";
     
-            await interaction.reply({
-                content
-            });
+            await interaction.editReply({ files: [{
+                attachment: canvasBuffer,
+                name: "image.png"
+            }] });
         } else {
-            await interaction.reply("you or the user you mentioned never wrote before");
+            await interaction.editReply("you or the user you mentioned never wrote before");
 
             console.log("didn't find the user");
             
