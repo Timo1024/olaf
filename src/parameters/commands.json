@@ -1,7 +1,7 @@
 {
     "xp" : {
         "getXPOverview" : {
-            "name" : "getoverview",
+            "name" : "xp-getoverview",
             "description" : "get an overview of xp, level an tokens",
             "options" : [
                 {
@@ -12,7 +12,7 @@
             "tokens" : 0
         },
         "tradeTokens" : {
-            "name" : "trade",
+            "name" : "xp-trade",
             "description" : "trade an amount of your tokens with somebody",
             "options" : [
                 {
@@ -25,12 +25,34 @@
                 }
             ],
             "tokens" : 0
+        },
+        "updateBanner" : {
+            "name" : "xp-banner",
+            "description" : "sets or deletes the background of your rank card",
+            "options" : [
+                {
+                    "name" : "image",
+                    "description" : "Upload image (less than 8mb)"
+                }
+            ],
+            "tokens" : 0
+        },
+        "updateColor" : {
+            "name" : "xp-color",
+            "description" : "sets the accent color of your rank card",
+            "options" : [
+                {
+                    "name" : "hexcode",
+                    "description" : "Write down the hex code of your color"
+                }
+            ],
+            "tokens" : 0
         }
     },
     "openai" : {
         "babbage" : {
             "ask" :  {
-                "name" : "askbabbage",
+                "name" : "ai-askbabbage",
                 "description" : "Ask Babbage a question",
                 "options" : [
                     {
@@ -43,7 +65,7 @@
         },
         "davinci" : {
             "ask" :  {
-                "name" : "askdavinci",
+                "name" : "ai-askdavinci",
                 "description" : "Ask Davinci a question",
                 "options" : [
                     {
@@ -56,7 +78,7 @@
         },
         "dalle" : {
             "image" :  {
-                "name" : "image",
+                "name" : "ai-image",
                 "description" : "Returns a generated image",
                 "options" : [
                     {
@@ -140,7 +162,7 @@
 
     "archive" : {
         "makeArchive" : {
-            "name" : "add-archive",
+            "name" : "archive-add",
             "description" : "Adding a new archive entry",
             "options" : [
                 {
@@ -167,7 +189,7 @@
             "tokens" : 0
         },
         "editArchive" : {
-            "name" : "edit-archive",
+            "name" : "archive-edit",
             "description" : "Editing a archive entry",
             "options" : [
                 {
@@ -198,7 +220,7 @@
             "tokens" : 0
         },
         "viewArchive" : {
-            "name" : "view-archive",
+            "name" : "archive-view",
             "description" : "Viewing a specific quote",
             "options" : [
                 {
@@ -209,12 +231,12 @@
             "tokens" : 0
         },
         "viewRandomArchive" : {
-            "name" : "view-random-archive",
+            "name" : "archive-view-random",
             "description" : "Viewing a random quote",
             "tokens" : 0
         },
         "deleteArchive" : {
-            "name" : "delete-archive",
+            "name" : "archive-delete",
             "description" : "Deleting a specific quote",
             "options" : [
                 {
@@ -231,7 +253,7 @@
                 "tokens" : 1
             },
             "leaderboard" : {
-                "name" : "leaderboard",
+                "name" : "archive-leaderboard",
                 "description" : "view the leaderboard of the archive quizz",
                 "options" : [
                     {

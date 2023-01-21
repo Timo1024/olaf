@@ -13,7 +13,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
     const User = await Table.findOne({ where: { userID: CurrentUser.id } });
 
     // Prepare canvas
-    const scaling = 3;
+    const scaling = 1;
 
     const can = createCanvas(1500 * scaling, 500 * scaling);
     const ctx = can.getContext("2d");
@@ -24,9 +24,14 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         const tokens   : number = User.get("tokens") as number;
         const xp       : number = User.get("xp") as number;
         const level    : number = User.get("level") as number;
+        const path     : string = User.get("imageLink") as string;
+        const accent   : string = User.get("accentColor") as string;
         console.log("Tokens: " + tokens);
         console.log("xp: " + xp);
         console.log("level: " + level);
+        console.log("path: " + path);
+        console.log("accent: " + accent);
+        
 
         // calculate how close to next level
         const xpForNextLvl     = 10 * (level**2);
@@ -54,17 +59,20 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         // const fontName : string = "Arial";
         const fontName : string = "cursive";
         
-        const path : string = "src/commands/xpSystem/userImages/" + CurrentUser.id + ".png";
-        if(fs.existsSync(path)){
-            
+        if(path !== null){
+
+            // const img : Image = new Image;
+            // img.src = path;
                 
             // background image
             ctx.save();
             ctx.beginPath();
             ctx.roundRect(280 * scaling, 0, 1220 * scaling, 500 * scaling, 10 * scaling);
             ctx.clip();
-            const image : Image = await loadImage(path);
-            ctx.drawImage(image, 280 * scaling, 0, image.width, image.height);
+            const img : Image = await loadImage(path);
+            
+            const ImageHeight : number = ((1220 * scaling)/img.width)*img.height;
+            ctx.drawImage(img, 280 * scaling, 0, 1220 * scaling, ImageHeight);
             ctx.closePath();
             ctx.restore();
 
@@ -106,7 +114,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         const degrees : number = 360 * percToNextLvl;
         ctx.lineCap = 'round';
         ctx.beginPath();
-        ctx.strokeStyle = colors.accentMain;
+        ctx.strokeStyle = accent;
         ctx.lineWidth = 10 * scaling;
         ctx.arc( 150 * scaling, 200 * scaling, 115 * scaling, (Math.PI/180) * 270, (Math.PI/180) * (270 + degrees) );
         ctx.stroke();
@@ -123,14 +131,14 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         // level under profile image
         let fontSize : string = (40 * scaling).toString();
         ctx.font = fontSize + "px " + fontName;
-        ctx.fillStyle = colors.accentMain;
+        ctx.fillStyle = accent;
         const levelText : string = "Level " + level.toString()
         ctx.fillText(levelText, (150 * scaling) - (ctx.measureText(levelText).width/2), 380 * scaling);
 
         // draw name of user
         fontSize = (70 * scaling).toString();
         ctx.font = fontSize + "px " + fontName;
-        ctx.fillStyle = colors.accentMain;
+        ctx.fillStyle = accent;
         ctx.fillText(
             Username, 
             900 * scaling - ctx.measureText(Username).width/2, 
@@ -140,7 +148,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         // draw tokens of user
         fontSize = (30 * scaling).toString();
         ctx.font = fontSize + "px " + fontName;
-        ctx.fillStyle = colors.accentMain;
+        ctx.fillStyle = accent;
         const tokensText : string = "Tokens left: " + tokens;
         ctx.fillText(
             tokensText, 
@@ -149,7 +157,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         );
 
         // make border around tokens
-        ctx.strokeStyle = colors.accentMain;
+        ctx.strokeStyle = accent;
         ctx.lineWidth = 1 * scaling;
         ctx.beginPath();
         ctx.roundRect(
@@ -173,7 +181,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
 
         const offset : number = 5 * scaling;
         const lineWidth : number = 15 * scaling;
-        ctx.strokeStyle = colors.accentMain;
+        ctx.strokeStyle = accent;
         ctx.lineWidth = 1 * scaling;
         ctx.beginPath();
         ctx.roundRect(
@@ -186,7 +194,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         ctx.closePath();
 
         ctx.lineCap = 'round';
-        ctx.strokeStyle = colors.accentMain;
+        ctx.strokeStyle = accent;
         ctx.lineWidth = lineWidth;
         ctx.beginPath();
         ctx.moveTo(500 * scaling, 250 * scaling);
@@ -194,7 +202,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         ctx.stroke();
 
         // make an arrow pointing at the end of the progress bar
-        ctx.strokeStyle = colors.accentMain;
+        ctx.strokeStyle = accent;
         canvas_arrow(
             ctx, 
             505 * scaling + Math.max(800 * scaling * percToNextLvl, 20 * scaling),
@@ -216,7 +224,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
 
         fontSize = (30 * scaling).toString();
         ctx.font = fontSize + "px " + fontName;
-        ctx.fillStyle = colors.accentMain;
+        ctx.fillStyle = accent;
         ctx.fillText(
             xpText, 
             (505 * scaling + Math.max(800 * scaling * percToNextLvl, 20 * scaling)) - (ctx.measureText(xpText).width/2), 
@@ -235,7 +243,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
 
         fontSize = (20 * scaling).toString();
         ctx.font = fontSize + "px " + fontName;
-        ctx.fillStyle = colors.accentMain;
+        ctx.fillStyle = accent;
         ctx.fillText(
             xpNextLvlText, 
             1340 * scaling, 
@@ -254,7 +262,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
 
         fontSize = (20 * scaling).toString();
         ctx.font = fontSize + "px " + fontName;
-        ctx.fillStyle = colors.accentMain;
+        ctx.fillStyle = accent;
         ctx.fillText(
             xpLastLvlText, 
             460 * scaling - (ctx.measureText(xpLastLvlText).width), 
@@ -262,12 +270,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
         );
 
     }
-
-
-
-
-
-
+    
     return can.toBuffer();
 
 }

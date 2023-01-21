@@ -41,6 +41,17 @@ export default (client: Client): ModelCtor<Model<any, any>>[] => {
                         defaultValue: 0,
                         allowNull: false,
                     },
+                    imageLink: {
+                        type: DataTypes.STRING,
+                        defaultValue: null,
+                        allowNull: true,
+                        unique: true
+                    },
+                    accentColor: {
+                        type: DataTypes.STRING,
+                        defaultValue: "#b69fa3",
+                        allowNull: false
+                    }
                 }, {
                     freezeTableName: true
                 })
