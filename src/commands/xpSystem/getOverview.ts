@@ -3,8 +3,9 @@ import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js
 import { Command } from "../../Command";
 import { xp } from "../../parameters/commands.json"
 import { makeDescription } from "../../lib/generalLib";
-import { Databases } from "../../bot";
+import { DatabasesXP } from "../../bot";
 import { makeXPCard } from "../../lib/canvasLib";
+import { XP } from "./../../parameters/databases.json"
 
 // TODO make dev command only
 export const XPOverview: Command = {
@@ -33,7 +34,7 @@ export const XPOverview: Command = {
 
         const canvasBuffer : Buffer = await makeXPCard(tagged_user ? tagged_user : interaction.user, (interaction.guild as Guild).id, client);
         
-        const Table = Databases.filter(x => x.name === interaction.guild?.id)[0];
+        const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
         const user = await Table.findOne({ where: { userID: userID } });
 
         if(user) {

@@ -3,7 +3,8 @@ import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js
 import { Command } from "../../Command";
 import { xp } from "../../parameters/commands.json"
 import { makeDescription } from "../../lib/generalLib";
-import { Databases } from "../../bot";
+import { DatabasesXP } from "../../bot";
+import { XP } from "./../../parameters/databases.json"
 
 // TODO make dev command only
 export const TradeTokens: Command = {
@@ -33,7 +34,7 @@ export const TradeTokens: Command = {
         const toUserID   : string = tagged_user.id;
         
         // find user in Database
-        const Table = Databases.filter(x => x.name === interaction.guild?.id)[0];
+        const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
         const fromUser = await Table.findOne({ where: { userID: fromUserID } });
         const toUser   = await Table.findOne({ where: { userID: toUserID   } });
 

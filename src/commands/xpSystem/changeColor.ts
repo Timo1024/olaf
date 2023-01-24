@@ -4,7 +4,8 @@ import { Command } from "../../Command";
 import { xp } from "../../parameters/commands.json";
 import { makeDescription } from "../../lib/generalLib";
 import * as fs from "fs";
-import { Databases } from "../../bot";
+import { DatabasesXP } from "../../bot";
+import { XP } from "./../../parameters/databases.json"
 
 export const UpdateColor: Command = {
     name: xp.updateColor.name,
@@ -25,7 +26,7 @@ export const UpdateColor: Command = {
         if(hexcodeCorrect(hexcode)){
 
             // find user in Database
-            const Table = Databases.filter(x => x.name === interaction.guild?.id)[0];
+            const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
             // const User  = await Table.findOne({ where: { userID: interaction.user.id } });
 
             const affectedRows = await Table.update({ accentColor: hexcode }, { where: { userID: interaction.user.id } });

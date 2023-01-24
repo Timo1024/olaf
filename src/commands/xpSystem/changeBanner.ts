@@ -4,7 +4,8 @@ import { Command } from "../../Command";
 import { xp } from "../../parameters/commands.json";
 import { makeDescription } from "../../lib/generalLib";
 import * as fs from "fs";
-import { Databases } from "../../bot";
+import { DatabasesXP } from "../../bot";
+import { XP } from "./../../parameters/databases.json"
 
 export const UpdateBanner: Command = {
     name: xp.updateBanner.name,
@@ -25,24 +26,12 @@ export const UpdateBanner: Command = {
 
         if(banner){
 
-            // const buffer : BufferResolvable | undefined = question?.attachment?.attachment as BufferResolvable | undefined;
             const url : string | undefined = banner?.attachment?.url;
 
             if(url){
 
-                // console.log(buffer);
-                
-                // var displayImage = new Image();
-                // displayImage.src = url;
-                // const file = new AttachmentBuilder(buffer);
-                // fs.writeFileSync("src/commands/xpSystem/userImages/" + interaction.user.id + ".jpg", buffer);
-                // const response = await fetch(url);
-                // const blob = await response.blob();
-                // const arrayBuffer = await blob.arrayBuffer();
-                // const buffer = Buffer.from(arrayBuffer);
-
                 // find user in Database
-                const Table = Databases.filter(x => x.name === interaction.guild?.id)[0];
+                const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
 
                 const affectedRows = await Table.update({ imageLink: url }, { where: { userID: interaction.user.id } });
 
@@ -57,7 +46,7 @@ export const UpdateBanner: Command = {
         } else {
 
             // find user in Database
-            const Table = Databases.filter(x => x.name === interaction.guild?.id)[0];
+            const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
 
             const affectedRows = await Table.update({ imageLink: null }, { where: { userID: interaction.user.id } });
 

@@ -1,15 +1,18 @@
 import { createCanvas, Image, loadImage } from "canvas";
 import { Client, User } from "discord.js";
 import { Context } from "vm";
-import { Databases } from "../bot";
+import { DatabasesXP } from "../bot";
 import * as colors from "../parameters/colors.json";
 import * as fs from "fs";
+import { XP } from "./../parameters/databases.json"
 
 // TODO change any
 export async function makeXPCard(CurrentUser : User, guildID : string, client : Client) : Promise<Buffer> {
     
     // get User
-    const Table = Databases.filter(x => x.name === guildID)[0];
+    console.log(DatabasesXP);
+    
+    const Table = DatabasesXP.filter(x => x.name === guildID + XP.suffix)[0];
     const User = await Table.findOne({ where: { userID: CurrentUser.id } });
 
     // Prepare canvas
