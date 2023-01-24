@@ -78,7 +78,7 @@ export default (client: Client): ModelStatic<Model<any, any>>[][] => {
                         defaultValue: 0,
                         allowNull: false,
                     },
-                    false: {
+                    incorrect: {
                         type: DataTypes.FLOAT(10, 0),
                         defaultValue: 0,
                         allowNull: false,
@@ -150,7 +150,7 @@ export default (client: Client): ModelStatic<Model<any, any>>[][] => {
 
         console.log(`${client.user.username} is online`);        
         
-    })
+    });
     
     return [DatabasesXP, DatabasesArchiveQuizz, DatabasesArchiveQuotes]
 
