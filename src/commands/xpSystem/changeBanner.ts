@@ -31,7 +31,7 @@ export const UpdateBanner: Command = {
             if(url){
 
                 // find user in Database
-                const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
+                const Table = DatabasesXP.filter((x: { name: string; }) => x.name === interaction.guild?.id + XP.suffix)[0];
 
                 const affectedRows = await Table.update({ imageLink: url }, { where: { userID: interaction.user.id } });
 
@@ -46,7 +46,7 @@ export const UpdateBanner: Command = {
         } else {
 
             // find user in Database
-            const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
+            const Table = DatabasesXP.filter((x: { name: string; }) => x.name === interaction.guild?.id + XP.suffix)[0];
 
             const affectedRows = await Table.update({ imageLink: null }, { where: { userID: interaction.user.id } });
 

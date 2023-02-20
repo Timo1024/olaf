@@ -34,7 +34,7 @@ export const TradeTokens: Command = {
         const toUserID   : string = tagged_user.id;
         
         // find user in Database
-        const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
+        const Table = DatabasesXP.filter((x: { name: string; }) => x.name === interaction.guild?.id + XP.suffix)[0];
         const fromUser = await Table.findOne({ where: { userID: fromUserID } });
         const toUser   = await Table.findOne({ where: { userID: toUserID   } });
 

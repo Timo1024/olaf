@@ -34,7 +34,7 @@ export const XPOverview: Command = {
 
         const canvasBuffer : Buffer = await makeXPCard(tagged_user ? tagged_user : interaction.user, (interaction.guild as Guild).id, client);
         
-        const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
+        const Table = DatabasesXP.filter((x: { name: string; }) => x.name === interaction.guild?.id + XP.suffix)[0];
         const user = await Table.findOne({ where: { userID: userID } });
 
         if(user) {

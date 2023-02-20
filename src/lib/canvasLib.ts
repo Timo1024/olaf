@@ -12,7 +12,7 @@ export async function makeXPCard(CurrentUser : User, guildID : string, client : 
     // get User
     console.log(DatabasesXP);
     
-    const Table = DatabasesXP.filter(x => x.name === guildID + XP.suffix)[0];
+    const Table = DatabasesXP.filter((x: { name: string; }) => x.name === guildID + XP.suffix)[0];
     const User = await Table.findOne({ where: { userID: CurrentUser.id } });
 
     // Prepare canvas

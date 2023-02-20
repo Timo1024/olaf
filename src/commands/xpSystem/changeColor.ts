@@ -26,7 +26,7 @@ export const UpdateColor: Command = {
         if(hexcodeCorrect(hexcode)){
 
             // find user in Database
-            const Table = DatabasesXP.filter(x => x.name === interaction.guild?.id + XP.suffix)[0];
+            const Table = DatabasesXP.filter((x: { name: string; }) => x.name === interaction.guild?.id + XP.suffix)[0];
             // const User  = await Table.findOne({ where: { userID: interaction.user.id } });
 
             const affectedRows = await Table.update({ accentColor: hexcode }, { where: { userID: interaction.user.id } });

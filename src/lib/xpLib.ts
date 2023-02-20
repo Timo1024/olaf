@@ -21,7 +21,7 @@ export async function addXPToUser(guildID: string, userID: string, xpAmount: num
     // adding user if user is not in database yet
     try {
         // getting the right table from database
-        const Table = DatabasesXP.filter(x => x.name === guildID + XP.suffix)[0];            
+        const Table = DatabasesXP.filter((x: { name: string; }) => x.name === guildID + XP.suffix)[0];            
 
         const user = await Table.create({
             userID: userID
@@ -33,7 +33,7 @@ export async function addXPToUser(guildID: string, userID: string, xpAmount: num
     }
 
     // adding the xp
-    const Table = DatabasesXP.filter(x => x.name === guildID + XP.suffix)[0];
+    const Table = DatabasesXP.filter((x: { name: string; }) => x.name === guildID + XP.suffix)[0];
     const user = await Table.findOne({ where: { userID: userID } });
 
     if (user) {
@@ -55,7 +55,7 @@ export async function addXPToUser(guildID: string, userID: string, xpAmount: num
 export async function updateLevelAndTokens(guildID: string, userID: string) {
     
     // getting the xp amount and the current level of the user
-    const Table = DatabasesXP.filter(x => x.name === guildID + XP.suffix)[0];
+    const Table = DatabasesXP.filter((x: { name: string; }) => x.name === guildID + XP.suffix)[0];
     const user = await Table.findOne({ where: { userID: userID } });
 
     if(user){
@@ -90,7 +90,7 @@ export async function updateLevelAndTokens(guildID: string, userID: string) {
 export async function updateTokens(guildID: string, userID: string, amount : number) : Promise<void> {
     
     // getting the user
-    const Table = DatabasesXP.filter(x => x.name === guildID + XP.suffix)[0];
+    const Table = DatabasesXP.filter((x: { name: string; }) => x.name === guildID + XP.suffix)[0];
     const user = await Table.findOne({ where: { userID: userID } });
 
     if(user){
@@ -114,7 +114,7 @@ export async function updateTokens(guildID: string, userID: string, amount : num
 export async function checkIfEnoughTokens(guildID: string, userID: string, amountToRemove : number) : Promise<boolean> {
 
     // getting the user
-    const Table = DatabasesXP.filter(x => x.name === guildID + XP.suffix)[0];
+    const Table = DatabasesXP.filter((x: { name: string; }) => x.name === guildID + XP.suffix)[0];
     const user = await Table.findOne({ where: { userID: userID } });
 
     if(user){

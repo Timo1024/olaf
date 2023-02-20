@@ -20,6 +20,9 @@ import { TradeTokens } from "./commands/xpSystem/tradeTokens";
 import { UpdateBanner } from "./commands/xpSystem/changeBanner";
 import { UpdateColor } from "./commands/xpSystem/changeColor";
 
+// TODO just for testing
+import { ArchiveToDatabase } from "./commands/archive/archiveToDatabaseTemp";
+
 // TODO for all new MESSAGE UI commands
 import { MessageInfo } from "./commands/ui_message/message_info";
 
@@ -43,5 +46,9 @@ export const Commands: (Command | UICommand)[] = [
     XPOverview,
     TradeTokens,
     UpdateBanner,
-    UpdateColor
+    UpdateColor,
+
+    // TODO just for testing
+    ArchiveToDatabase
+
 ];

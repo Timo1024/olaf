@@ -32,7 +32,7 @@ export const quizzLeaderboardArchive: Command = {
     type: ApplicationCommandType.ChatInput,
     run: async (client: Client, interaction: CommandInteraction) => {
 
-        const Table = DatabasesArchiveQuizz.filter(x => x.name === interaction.guild?.id + ArchiveQuizz.suffix)[0];
+        const Table = DatabasesArchiveQuizz.filter((x: { name: string; }) => x.name === interaction.guild?.id + ArchiveQuizz.suffix)[0];
         const users : Model<any, any>[] = await Table.findAll();
             
         // getting all options of the command

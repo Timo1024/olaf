@@ -31,7 +31,7 @@ process.on("multipleResolves", async (type, promise, reason) => {
     console.error("Multiple Resolves:\n", type, promise, reason);
 });
 
-export const [DatabasesXP, DatabasesArchiveQuizz, DatabasesArchiveQuotes] = ready(client);
+export const [DatabasesXP, DatabasesArchiveQuizz, DatabasesArchiveQuotes, sequelize] = ready(client);
 
 interactionCreate(client);
 messageCreate(client);

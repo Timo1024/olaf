@@ -3,7 +3,7 @@ import { Commands } from "../Commands";
 import { Sequelize, DataTypes, Model, ModelStatic } from "sequelize";
 import { XP, ArchiveQuotes, ArchiveQuizz } from "./../parameters/databases.json";
 
-export default (client: Client): ModelStatic<Model<any, any>>[][] => {
+export default (client: Client): any => {
 
     // initialize database
     const sequelize : Sequelize = new Sequelize('database', 'user', 'password', {
@@ -125,7 +125,8 @@ export default (client: Client): ModelStatic<Model<any, any>>[][] => {
                         allowNull: true
                     }
                 }, {
-                    freezeTableName: true
+                    freezeTableName: true,
+                    initialAutoIncrement: "1"
                 })
             )
         });
@@ -152,6 +153,6 @@ export default (client: Client): ModelStatic<Model<any, any>>[][] => {
         
     });
     
-    return [DatabasesXP, DatabasesArchiveQuizz, DatabasesArchiveQuotes]
+    return [DatabasesXP, DatabasesArchiveQuizz, DatabasesArchiveQuotes, sequelize]
 
 };
