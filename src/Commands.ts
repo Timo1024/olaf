@@ -35,7 +35,7 @@ export const Commands: (Command | UICommand)[] = [
     viewArchive,
     viewRandomArchive,
     deleteArchive,
-    quizzArchive,
+    // quizzArchive,
     quizzLeaderboardArchive,
     AskBabbage,
     AskDavinci,
