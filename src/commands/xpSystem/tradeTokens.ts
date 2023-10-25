@@ -28,9 +28,9 @@ export const TradeTokens: Command = {
 
         // get user and amount
         const amount : number    = interaction.options.get(xp.tradeTokens.options[0].name)?.value as number;
-        const tagged_user : User = interaction.options.getUser(xp.tradeTokens.options[1].name) as User;
+        const tagged_user : User | undefined = interaction.options.get(xp.getXPOverview.options[0].name)?.user;
         const fromUserID : string = interaction.user.id;
-        const toUserID   : string = tagged_user.id;
+        const toUserID   : string | undefined = tagged_user?.id;
         
         // find user in Database
         const Table = Databases.filter(x => x.name === interaction.guild?.id)[0];

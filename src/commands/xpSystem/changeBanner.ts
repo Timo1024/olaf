@@ -21,7 +21,7 @@ export const UpdateBanner: Command = {
     run: async (client: Client, interaction: CommandInteraction) => {
         
         const banner = interaction.options.get(xp.updateBanner.options[0].name)
-        console.log(banner?.attachment?.attachment);
+        console.log(banner?.attachment?.url);
 
         if(banner){
 

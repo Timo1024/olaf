@@ -1,8 +1,8 @@
 import { Client, Events } from "discord.js";
 import { Commands } from "../Commands";
-import { Sequelize, DataTypes, Model, ModelCtor } from "sequelize";
+import { Sequelize, DataTypes, Model, ModelStatic } from "sequelize";
 
-export default (client: Client): ModelCtor<Model<any, any>>[] => {
+export default (client: Client): ModelStatic<Model<any, any>>[] => {
 
     // initialize database
     const sequelize = new Sequelize('database', 'user', 'password', {
@@ -13,7 +13,7 @@ export default (client: Client): ModelCtor<Model<any, any>>[] => {
         storage: 'database.sqlite',
     });
 
-    const Databases: ModelCtor<Model<any, any>>[] = [];
+    const Databases: ModelStatic<Model<any, any>>[] = [];
 
     client.on(Events.ClientReady, async () => {
 

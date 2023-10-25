@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
+import { CommandInteraction, Client, EmbedBuilder, GuildMember } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { developer, makeDescription } from "../../lib/generalLib";
 import { Command } from "../../Command";
@@ -71,8 +71,13 @@ export const editArchive: Command = {
                     const date       : string = interaction.options.get(archive.editArchive.options[3].name)?.value as string;
                     const quizz      : string = (interaction.options.get(archive.editArchive.options[4].name)?.value)?.toString() as string;
                     let userID       : string;
-                    if(interaction.options.getUser(archive.editArchive.options[5].name)){
-                        userID = (interaction.options.getUser(archive.editArchive.options[5].name)?.id)?.toString() as string;
+                    if(interaction.options.get(archive.makeArchive.options[4].name)){
+                        const taggedMember : GuildMember | null = interaction.options.get(archive.makeArchive.options[4].name) as GuildMember | null;
+                        if(taggedMember){
+                            userID = (taggedMember.user.id).toString() as string;
+                        } else {
+                            userID = "undefined";
+                        }
                     } else {
                         userID = "undefined";
                     }

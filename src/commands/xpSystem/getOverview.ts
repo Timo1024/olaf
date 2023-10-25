@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, User, Guild } from "discord.js";
+import { CommandInteraction, Client, User, Guild, GuildMember } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { Command } from "../../Command";
 import { xp } from "../../parameters/commands.json"
@@ -23,7 +23,8 @@ export const XPOverview: Command = {
         await interaction.deferReply();
 
         // get user
-        const tagged_user : User | null = interaction.options.getUser(xp.getXPOverview.options[0].name);
+        const tagged_member : GuildMember | null = interaction.options.get(xp.getXPOverview.options[0].name) as GuildMember | null;
+        const tagged_user : User | undefined = tagged_member?.user;
         let userID : string;
         if(tagged_user){
             userID = tagged_user.id;

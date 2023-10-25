@@ -1,4 +1,4 @@
-import { CommandInteraction, Client, Message, EmbedBuilder, User } from "discord.js";
+import { CommandInteraction, Client, Message, EmbedBuilder, User, GuildMember } from "discord.js";
 import { ApplicationCommandType, ApplicationCommandOptionType } from 'discord.js';
 import { developer, makeDescription } from "../../lib/generalLib";
 import { Command } from "../../Command";
@@ -73,8 +73,13 @@ export const addArchive: Command = {
                     const date       : string = interaction.options.get(archive.makeArchive.options[2].name)?.value as string;
                     const quizz      : string = (interaction.options.get(archive.makeArchive.options[3].name)?.value)?.toString() as string;
                     let userID : string;
-                    if(interaction.options.getUser(archive.makeArchive.options[4].name)){
-                        userID = (interaction.options.getUser(archive.makeArchive.options[4].name)?.id)?.toString() as string;
+                    if(interaction.options.get(archive.makeArchive.options[4].name)){
+                        const taggedMember : GuildMember | null = interaction.options.get(archive.makeArchive.options[4].name) as GuildMember | null;
+                        if(taggedMember){
+                            userID = (taggedMember.user.id).toString() as string;
+                        } else {
+                            userID = "undefined";
+                        }
                     } else {
                         userID = "undefined";
                     }
@@ -111,8 +116,13 @@ export const addArchive: Command = {
                 const date       : string = interaction.options.get(archive.makeArchive.options[2].name)?.value as string;
                 const quizz      : string = (interaction.options.get(archive.makeArchive.options[3].name)?.value)?.toString() as string;
                 let userID : string;
-                if(interaction.options.getUser(archive.makeArchive.options[4].name)){
-                    userID = (interaction.options.getUser(archive.makeArchive.options[4].name)?.id)?.toString() as string;
+                if(interaction.options.get(archive.makeArchive.options[4].name)){
+                    const taggedMember : GuildMember | null = interaction.options.get(archive.makeArchive.options[4].name) as GuildMember | null;
+                    if(taggedMember){
+                        userID = (taggedMember.user.id).toString() as string;
+                    } else {
+                        userID = "undefined";
+                    }
                 } else {
                     userID = "undefined";
                 }
